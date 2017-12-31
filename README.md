@@ -1,11 +1,12 @@
 # jiggle
-Easy to use and lightweight photo asset management sofware.
+Easy to use and lightweight photo asset management software.
 
 # High-level requirements
 
-- Cross-platform (mac, Windows, Linux)
+- Cross-platform (mac, Linux, Windows)
+- Simply so even my mum could manage thousands of assets
 - Manage thousands of photos and videos on-prem or in the cloud
-- Use latest tech like containerized software development etc.
+- Web UI and later on maybe native UI's for 
 - Responsive frontend so it works well on smartphones and one can upload smartphone photos easily
 - Support EXIF and other metadata
 - Photos and videos must be stored in the file-system in a natural folder hierarchie. Use a "moment" (aka album) for building the foldernames
@@ -28,6 +29,7 @@ Easy to use and lightweight photo asset management sofware.
 - Full CI/CD pipeline
 - Unit-Testing for the backend
 - Unit-Testing for the frontend where it makes sense
+- Native clients eg for iOS and AppleTV using Xamarin (.Net Core, Xamarin Forms, etc.)
 
 # Architecture
 
