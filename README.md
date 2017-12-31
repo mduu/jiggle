@@ -16,13 +16,14 @@ Easy to use and lightweight photo asset management software.
 - Multiple usergroups and rights for different parts of the photo hierarchy
 - Automated import and export features (provide API)
 - Support upload of RAW images too. Store them as "variation" of the JPG's
-- Optinoal: versioning
+- Optional: versioning
 
 # Technology
 
 - Backend with ASP.Net Core WebAPI
 - SPA Frontend with eg. React
-- Lightweight and crossplatform database running on-prem and in the cloud: Mongo DB
+- Lightweight and crossplatform database running on-prem and in the cloud: Mongo DB or EF Core w. PostgreSQL etc.
+  - Should we go relational or document DB?
 - Use SOLID Prinziples at its hart
 - Implement backend using adapter pattern eg. for different storage-systems
 - Use Docker-Containers for deployment
