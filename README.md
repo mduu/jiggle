@@ -9,7 +9,7 @@ Easy to use and lightweight photo asset management software.
 - Web UI and later on maybe native UI's for 
 - Responsive frontend so it works well on smartphones and one can upload smartphone photos easily
 - Support EXIF and other metadata
-- Photos and videos must be stored in the file-system in a natural folder hierarchie. Use a "moment" (aka album) for building the foldernames
+- Photos and videos must be stored in the file-system in a natural folder hierarchie. Use year/month/day for building the foldernames. Allow Regex to configure how to build the folder hierachy.
 - Define hierarchical tags
 - Define smart-albums based on tags
 - Streams/Activities so users cany easily follow the "what's new"
