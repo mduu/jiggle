@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Server", "Jiggle.Server\Jiggle.Server.csproj", "{99AB249C-3662-4C65-AC33-6846C904C8F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Domain", "Jiggle.Domain\Jiggle.Domain.csproj", "{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Core", "Jiggle.Core\Jiggle.Core.csproj", "{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.DataAccess", "Jiggle.DataAccess\Jiggle.DataAccess.csproj", "{681EF0CE-7535-438D-A27F-24586701C1E1}"
 EndProject
