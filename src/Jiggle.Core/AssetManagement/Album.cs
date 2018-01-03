@@ -13,5 +13,4 @@ namespace Jiggle.Core.AssetManagement
         public virtual Album ParentAlbum { get; set; }
         public virtual ICollection<Album> ChildAlbums { get; set; }
     }
-
 }
