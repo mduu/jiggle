@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Server", "Jiggle.Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Core", "Jiggle.Core\Jiggle.Core.csproj", "{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.DataAccess", "Jiggle.DataAccess\Jiggle.DataAccess.csproj", "{681EF0CE-7535-438D-A27F-24586701C1E1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,17 +44,5 @@ Global
 		{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}.Release|x64.Build.0 = Release|Any CPU
 		{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}.Release|x86.ActiveCfg = Release|Any CPU
 		{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}.Release|x86.Build.0 = Release|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Debug|x64.Build.0 = Debug|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Debug|x86.Build.0 = Debug|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Release|x64.ActiveCfg = Release|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Release|x64.Build.0 = Release|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Release|x86.ActiveCfg = Release|Any CPU
-		{681EF0CE-7535-438D-A27F-24586701C1E1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
