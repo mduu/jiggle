@@ -26,8 +26,7 @@ namespace server
         {
             services.AddMvc();
 
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlite("Data Source=Jiggle.db"));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlite("Data Source=Jiggle.db"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
