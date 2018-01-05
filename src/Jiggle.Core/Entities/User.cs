@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Jiggle.Core.Common;
 using System.Collections.Generic;
-using Jiggle.Core.AssetManagement;
 
-namespace Jiggle.Core.Security
+namespace Jiggle.Core.Entities
 {
     public class User : EntityBase
     {

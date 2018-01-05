@@ -1,6 +1,5 @@
 ﻿using System;
-using Jiggle.Core.AssetManagement;
-using Jiggle.Core.Security;
+using Jiggle.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jiggle.Core.Common

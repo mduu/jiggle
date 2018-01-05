@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
-using Jiggle.Core.AssetManagement;
+using Jiggle.Core.Entities;
 
 namespace Jiggle.Core.Common
 {
