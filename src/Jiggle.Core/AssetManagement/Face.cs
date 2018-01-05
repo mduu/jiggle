@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Jiggle.Core.Common;
+using Jiggle.Core.Security;
 
 namespace Jiggle.Core.AssetManagement
 {
@@ -12,6 +13,9 @@ namespace Jiggle.Core.AssetManagement
         public string Firstname { get; set; }
         public string Lastname { get; set; }
 
-        public ICollection<FaceAsset> FaceAssets { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
+
+        public ICollection<FaceAsset> Assets { get; set; }
     }
 }

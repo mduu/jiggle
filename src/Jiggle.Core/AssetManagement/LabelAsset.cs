@@ -1,14 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Jiggle.Core.Common;
 
 namespace Jiggle.Core.AssetManagement
 {
-    public class FaceAsset : EntityBase
+    public class LabelAsset
     {
         [Required]
-        public Guid FaceId { get; set; }
-        public Face Face { get; set; }
+        public Guid LabelId { get; set; }
+        public Label Label { get; set; }
 
         [Required]
         public Guid AssetId { get; set; }

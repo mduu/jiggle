@@ -10,6 +10,6 @@ namespace Jiggle.Core.AssetManagement
         [Required]
         public string Name { get; set; }
 
-        public ICollection<TagAsset> TagAssets { get; set; }
+        public ICollection<TagAsset> Assets { get; set; }
     }
 }

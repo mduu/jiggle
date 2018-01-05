@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="AssetManagement\" />
     <Folder Include="Common\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />

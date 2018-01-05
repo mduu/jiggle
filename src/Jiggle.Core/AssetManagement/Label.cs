@@ -11,6 +11,6 @@ namespace Jiggle.Core.AssetManagement
         public string Name { get; set; }
         public string Color { get; set; }
 
-        public ICollection<Asset> Assets { get; set; }
+        public ICollection<LabelAsset> Assets { get; set; }
     }
 }
