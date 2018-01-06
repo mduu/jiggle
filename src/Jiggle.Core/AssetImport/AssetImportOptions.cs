@@ -16,6 +16,7 @@ namespace Jiggle.Core.AssetImport
 
             OriginalFileContent = originalFileContent ?? throw new ArgumentNullException(nameof(originalFileContent));
             Username = !string.IsNullOrWhiteSpace(username) ? username : throw new ArgumentNullException(nameof(username));
+
             Tagnames = tagnames;
             ExistingAlbumId = existingAlbumId;
             NewAlbumTitle = newAlbumTitle;
