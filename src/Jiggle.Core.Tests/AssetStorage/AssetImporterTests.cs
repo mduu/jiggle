@@ -3,7 +3,7 @@ using Xunit;
 using Jiggle.Core.AssetImport;
 using System.Threading.Tasks;
 
-namespace Jiggle.Core.Tests
+namespace Jiggle.Core.Tests.AssetStorage
 {
     public class AssetImporterTests
     {

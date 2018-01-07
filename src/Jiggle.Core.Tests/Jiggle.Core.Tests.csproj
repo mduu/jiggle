@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Jiggle.Core\Jiggle.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AssetStorage\" />
+  </ItemGroup>
 </Project>
