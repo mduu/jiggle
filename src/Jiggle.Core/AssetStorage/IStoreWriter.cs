@@ -6,6 +6,7 @@ namespace Jiggle.Core.AssetStorage
 {
     public interface IStoreWriter
     {
-        Task<string> WriteOriginalFileIntoStoreAsync(Asset asset, Stream originalFileContent);
+        Task<string> WriteOriginalFileToStoreAsync(Asset asset, Stream originalFileContent);
+        Task<string> WriteThumbnailFileToStoreAsync(Asset asset, Stream thumbnailFileContent, int width, int height);
     }
 }
