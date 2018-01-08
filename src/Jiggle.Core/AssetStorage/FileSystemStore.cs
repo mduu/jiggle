@@ -44,6 +44,19 @@ namespace Jiggle.Core.AssetStorage
             if (fileContent == null) throw new ArgumentNullException(nameof(fileContent));
             if (string.IsNullOrWhiteSpace(filepath)) throw new ArgumentNullException(nameof(filepath));
 
+            // Check that the file does not already exists
+            if (File.Exists(filepath))
+            {
+                throw new InvalidOperationException($"File [{filepath}]");
+            }
+
+            // Check and create folder
+            string folderpath = Path.GetDirectoryName(filepath);
+            if (!Directory.Exists(folderpath))
+            {
+                Directory.CreateDirectory(folderpath);
+            }
+
             using (var fileStream = File.Create(filepath))
             {
                 fileContent.Seek(0, SeekOrigin.Begin);
