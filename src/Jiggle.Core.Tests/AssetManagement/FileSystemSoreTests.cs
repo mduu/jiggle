@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Xunit;
-using Jiggle.Core.AssetStorage;
 using System.Reflection;
 using System.IO;
 using Jiggle.Core.Entities;
+using Jiggle.Core.AssetManagement.Storage;
 
-namespace Jiggle.Core.Tests.AssetStorage
+namespace Jiggle.Core.Tests.AssetManagement
 {
     /// <summary>
     /// Unit-Tests for <see cref="FileSystemStore"/>.

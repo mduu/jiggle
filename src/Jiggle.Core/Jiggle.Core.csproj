@@ -7,8 +7,9 @@
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="Common\" />
-    <Folder Include="AssetImport\" />
-    <Folder Include="AssetStorage\" />
+    <Folder Include="AssetManagement\" />
+    <Folder Include="AssetManagement\Import\" />
+    <Folder Include="AssetManagement\Storage\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />

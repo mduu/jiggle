@@ -1,7 +1,7 @@
 ﻿using System;
 using Jiggle.Core.Entities;
 
-namespace Jiggle.Core.AssetStorage
+namespace Jiggle.Core.AssetManagement.Storage
 {
     /// <summary>
     /// Manage locations on the file system by calculating file system paths.

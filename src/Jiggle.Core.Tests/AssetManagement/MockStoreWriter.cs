@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using Jiggle.Core.AssetStorage;
 using Jiggle.Core.Entities;
 using System.Collections.Generic;
+using Jiggle.Core.AssetManagement.Storage;
 
-namespace Jiggle.Core.Tests.AssetStorage
+namespace Jiggle.Core.Tests.AssetManagement
 {
     public class MockStoreWriter : IStoreWriter
     {

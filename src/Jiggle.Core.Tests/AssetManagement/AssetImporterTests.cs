@@ -1,9 +1,9 @@
 using System;
 using Xunit;
-using Jiggle.Core.AssetImport;
 using System.Threading.Tasks;
+using Jiggle.Core.AssetManagement.Import;
 
-namespace Jiggle.Core.Tests.AssetStorage
+namespace Jiggle.Core.Tests.AssetManagement
 {
     public class AssetImporterTests
     {

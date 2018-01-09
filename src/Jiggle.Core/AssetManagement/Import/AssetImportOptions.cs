@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
-namespace Jiggle.Core.AssetImport
+
+namespace Jiggle.Core.AssetManagement.Import
 {
     public class AssetImportOptions
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-namespace Jiggle.Core.AssetStorage
+namespace Jiggle.Core.AssetManagement.Storage
 {
     public static class FileSystemHelper
     {

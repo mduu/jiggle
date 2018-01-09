@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Jiggle.Core.AssetImport
+namespace Jiggle.Core.AssetManagement
 {
     public interface IThumbnailGenerator
     {

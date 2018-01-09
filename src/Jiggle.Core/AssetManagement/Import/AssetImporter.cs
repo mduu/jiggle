@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Jiggle.Core.AssetManagement.Storage;
 using Jiggle.Core.Entities;
-using Jiggle.Core.AssetStorage;
 
-namespace Jiggle.Core.AssetImport
+namespace Jiggle.Core.AssetManagement.Import
 {
     public class AssetImporter : IAssetImporter
     {

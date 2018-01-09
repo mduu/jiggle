@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Jiggle.Core.Entities;
 
-namespace Jiggle.Core.AssetStorage
+namespace Jiggle.Core.AssetManagement.Storage
 {
     public interface IStoreWriter
     {
