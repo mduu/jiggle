@@ -20,6 +20,8 @@ namespace Jiggle.Core.Tests.AssetStorage
         private FileSystemConfiguration configuration;
         private FileSystemLocationManager locationManager;
         private FileSystemStore store;
+        private Asset testAsset;
+        private Stream testImageContent;
 
         public FileSystemSoreTests()
         {
@@ -29,6 +31,13 @@ namespace Jiggle.Core.Tests.AssetStorage
             configuration = new FileSystemConfiguration(originalRootFilepath, thumbRootFilepath);
             locationManager = new FileSystemLocationManager(configuration);
             store = new FileSystemStore(locationManager);
+            testAsset = new Asset
+            {
+                OriginalFileName = "MyPic.jpg",
+                OriginalFileMimeType = "image/jpg",
+                TakenTime = new DateTimeOffset(2018, 1, 20, 18, 0, 0, new TimeSpan(0)),
+            };
+            testImageContent = new MemoryStream(new byte[2] { 0x12, 0x13 });
         }
 
         public void Dispose()
@@ -40,13 +49,6 @@ namespace Jiggle.Core.Tests.AssetStorage
         public async Task Test_WriteOriginalFileToStoreAsync()
         {
             // Arrange
-            var testAsset = new Asset
-            {
-                OriginalFileName = "MyPic.jpg",
-                OriginalFileMimeType = "image/jpg",
-                TakenTime = new DateTimeOffset(2018, 1, 20, 18, 0, 0, new TimeSpan(0)),
-            };
-            var testImageContent = new MemoryStream(new byte[2] { 0x12, 0x13 });
 
             // Act
             var locationInfo = await store.WriteOriginalFileToStoreAsync(testAsset, testImageContent);
@@ -59,16 +61,30 @@ namespace Jiggle.Core.Tests.AssetStorage
         }
 
         [Fact]
+        public async Task Test_WriteOriginalFileToStoreAsync_TryOverrideOriginal()
+        {
+            // Arrange
+
+            // Act
+
+            // Write original the first time -> OK
+            var locationInfo = await store.WriteOriginalFileToStoreAsync(testAsset, testImageContent);
+
+            // Try override original -> ERROR
+            var exception = Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await store.WriteOriginalFileToStoreAsync(testAsset, testImageContent));
+
+            // Assert
+            CheckFiles(
+                locationInfo,
+                Path.Combine(originalRootFilepath, "2018/1/20/MyPic.jpg"),
+                Path.Combine(thumbRootFilepath, "2018/1/20/MyPic.jpg"));
+        }
+
+        [Fact]
         public async Task Test_WriteThumbnailFileToStoreAsync()
         {
             // Arrange
-            var testAsset = new Asset
-            {
-                OriginalFileName = "MyPic.jpg",
-                OriginalFileMimeType = "image/jpg",
-                TakenTime = new DateTimeOffset(2018, 1, 20, 18, 0, 0, new TimeSpan(0)),
-            };
-            var testImageContent = new MemoryStream(new byte[2] { 0x12, 0x13 });
 
             // Act
             var locationInfo = await store.WriteThumbnailFileToStoreAsync(testAsset, testImageContent, 200, 150);
@@ -80,11 +96,28 @@ namespace Jiggle.Core.Tests.AssetStorage
                 Path.Combine(originalRootFilepath, "2018/1/20/MyPic.jpg"));
         }
 
+        [Fact]
+        public async Task Test_WriteThumbnailFileToStoreAsync_Override_Thumbnail()
+        {
+            // Arrange
+
+            // Act
+            var locationInfo = await store.WriteThumbnailFileToStoreAsync(testAsset, testImageContent, 200, 150);
+            var locationInfo2 = await store.WriteThumbnailFileToStoreAsync(testAsset, testImageContent, 200, 150);
+
+            // Assert
+            CheckFiles(
+                locationInfo,
+                Path.Combine(thumbRootFilepath, "2018/1/20/MyPic_200_150.jpg"),
+                Path.Combine(originalRootFilepath, "2018/1/20/MyPic.jpg"));
+            Assert.Equal(locationInfo2, locationInfo);
+        }
+
         private void CheckFiles(string locationInfo, string filepathThatMustExists, string filepathThatMustNotExists)
         {
             Assert.NotEmpty(locationInfo);
             Assert.Equal(locationInfo, filepathThatMustExists);
-            Assert.True(File.Exists(filepathThatMustExists)); 
+            Assert.True(File.Exists(filepathThatMustExists));
             Assert.False(File.Exists(filepathThatMustNotExists));
             Assert.Equal(new FileInfo(locationInfo).Length, 2);
         }

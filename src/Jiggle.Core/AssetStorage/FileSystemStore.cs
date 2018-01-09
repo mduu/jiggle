@@ -21,7 +21,7 @@ namespace Jiggle.Core.AssetStorage
             if (originalFileContent == null) throw new ArgumentNullException(nameof(originalFileContent));
 
             var originalFilepath = locationManager.GetPathForOriginal(asset);
-            await WriteStreamToFileAsync(originalFileContent, originalFilepath);
+            await WriteStreamToFileAsync(originalFileContent, originalFilepath, false);
 
             return originalFilepath;
         }
@@ -33,13 +33,13 @@ namespace Jiggle.Core.AssetStorage
             if (thumbnailFileContent == null) throw new ArgumentNullException(nameof(thumbnailFileContent));
 
             var thumbnailFilepath = locationManager.GetPathForThumbnail(asset, width, height);
-            await WriteStreamToFileAsync(thumbnailFileContent, thumbnailFilepath);
+            await WriteStreamToFileAsync(thumbnailFileContent, thumbnailFilepath, true);
 
             return thumbnailFilepath;
 
         }
 
-        private static async Task WriteStreamToFileAsync(Stream fileContent, string filepath)
+        private static async Task WriteStreamToFileAsync(Stream fileContent, string filepath, bool allowUpdate)
         {
             if (fileContent == null) throw new ArgumentNullException(nameof(fileContent));
             if (string.IsNullOrWhiteSpace(filepath)) throw new ArgumentNullException(nameof(filepath));
@@ -47,7 +47,14 @@ namespace Jiggle.Core.AssetStorage
             // Check that the file does not already exists
             if (File.Exists(filepath))
             {
-                throw new InvalidOperationException($"File [{filepath}]");
+                if (!allowUpdate)
+                {
+                    throw new InvalidOperationException($"File [{filepath}]");
+                }
+                else
+                {
+                    File.Delete(filepath);
+                }
             }
 
             // Check and create folder
