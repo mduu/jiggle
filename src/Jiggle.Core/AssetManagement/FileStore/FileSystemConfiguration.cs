@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jiggle.Core.AssetManagement.Storage
+namespace Jiggle.Core.AssetManagement.FileStore
 {
     /// <summary>
     /// Configuration for the <see cref="FileSystemStore"/>.

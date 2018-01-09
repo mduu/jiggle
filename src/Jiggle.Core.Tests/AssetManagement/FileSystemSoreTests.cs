@@ -4,7 +4,7 @@ using Xunit;
 using System.Reflection;
 using System.IO;
 using Jiggle.Core.Entities;
-using Jiggle.Core.AssetManagement.Storage;
+using Jiggle.Core.AssetManagement.FileStore;
 
 namespace Jiggle.Core.Tests.AssetManagement
 {

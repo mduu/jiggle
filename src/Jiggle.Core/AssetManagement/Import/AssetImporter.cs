@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Jiggle.Core.AssetManagement.Storage;
+using Jiggle.Core.AssetManagement.FileStore;
 using Jiggle.Core.Entities;
 
 namespace Jiggle.Core.AssetManagement.Import

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Jiggle.Core.Entities;
 using System.Collections.Generic;
-using Jiggle.Core.AssetManagement.Storage;
+using Jiggle.Core.AssetManagement.FileStore;
 
 namespace Jiggle.Core.Tests.AssetManagement
 {

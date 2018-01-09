@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Jiggle.Core.Entities;
 
-namespace Jiggle.Core.AssetManagement.Storage
+namespace Jiggle.Core.AssetManagement.FileStore
 {
     public class FileSystemStore : IStoreWriter
     {
