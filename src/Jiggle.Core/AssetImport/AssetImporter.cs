@@ -18,7 +18,19 @@ namespace Jiggle.Core.AssetImport
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
+            var asset = new Asset
+            {
+                Id = Guid.NewGuid(),
+                // TODO Initialize asset
+            };
 
+            // TODO Build Thumbnail
+
+            var locationInfoOriginal = storeWriter.WriteOriginalFileToStoreAsync(asset, options.OriginalFileContent);
+
+            // TODO Write thumbnail file
+
+            // TODO Store asset in database
 
             throw new NotImplementedException();
         }

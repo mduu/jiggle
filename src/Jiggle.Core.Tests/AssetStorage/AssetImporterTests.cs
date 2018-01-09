@@ -11,7 +11,8 @@ namespace Jiggle.Core.Tests.AssetStorage
         public async Task ImportWithNullOptions()
         {
             // Arrage
-            var assetImporter = new AssetImporter();
+            var storeWriter = new MockStoreWriter();
+            var assetImporter = new AssetImporter(storeWriter);
 
             // Act
             var exception = await Assert.ThrowsAsync<ArgumentNullException>(() => assetImporter.ImportAssetAsync(null));
