@@ -18,6 +18,8 @@ namespace Jiggle.Core.AssetManagement.Import
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
+			// TODO Find or create album
+
             var asset = new Asset
             {
                 Id = Guid.NewGuid(),
