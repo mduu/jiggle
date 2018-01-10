@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Jiggle.Core.Entities;
-using Jiggle.Core.Common;
-using System.Collections.Generic;
 
 namespace Jiggle.Core.AssetManagement
 {
@@ -31,16 +30,10 @@ namespace Jiggle.Core.AssetManagement
         /// Create a new <see cref="Album"/>.
         /// </summary>
         /// <returns>The new album.</returns>
-        /// <param name="context">Context.</param>
-        /// <param name="albumTitle">Album title.</param>
-        /// <param name="albumDescription">Album description.</param>
-        Task<Album> CreateNewAlbumAsync(string albumTitle, string albumDescription, Guid? parentAlbumId = null);
-
-        /// <summary>
-        /// Updates the album asynchronous.
-        /// </summary>
-        /// <param name="albumToUpdate">Album to update.</param>
-        /// 
-        Task UpdateAlbumAsync(Album albumToUpdate);
+        /// <param name="albumDescription">The mandatory albumname.</param>
+        /// <param name="albumDescription">An optional description.</param>
+        /// <param name="currentUserId">ID of the current user.</param>
+        /// <param name="parentAlbumId">Optional ID of the parent album.</param>
+        Album CreateNewAlbum(string albumName, string albumDescription, Guid currentUserId, Guid? parentAlbumId = null);
     }
 }

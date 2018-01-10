@@ -15,8 +15,10 @@ namespace Jiggle.Core.Entities
         public Guid CreatedById { get; set; }
         public User CreatedBy { get; set; }
 
-        public ICollection<AlbumAsset> Assets { get; set; }
+        public Guid? ParentAlbumId { get; set; }
         public Album ParentAlbum { get; set; }
+
+        public ICollection<AlbumAsset> Assets { get; set; }
         public ICollection<Album> ChildAlbums { get; set; }
     }
 }

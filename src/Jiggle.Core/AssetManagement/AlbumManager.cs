@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Jiggle.Core.Common;
 using Jiggle.Core.Entities;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Jiggle.Core.AssetManagement
 {
@@ -11,29 +13,50 @@ namespace Jiggle.Core.AssetManagement
     {
         private readonly DatabaseContext context;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Jiggle.Core.AssetManagement.AlbumManager"/> class.
+        /// </summary>
+        /// <param name="context">Database context to use.</param>
         public AlbumManager(DatabaseContext context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<Album> CreateNewAlbumAsync(string albumTitle, string albumDescription, Guid? parentAlbumId = null)
+        /// <inheritdoc/>
+        public async Task<Album> GetAlbumByIdAsync(Guid albumId)
         {
-            throw new NotImplementedException();
+            return await context.Albums
+                                .Include(a => a.CreatedBy)
+                                .Include(a => a.ChildAlbums)
+                                .FirstAsync(a => a.Id == albumId);
         }
 
-        public Task<Album> GetAlbumByIdAsync(Guid albumId)
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Album>> GetAlbumsByParentAlbumIdAsync(Guid? parentAlbumId)
         {
-            throw new NotImplementedException();
+            return await context.Albums
+                                .Include(a => a.CreatedBy)
+                                .Where(a => a.ParentAlbumId == parentAlbumId)
+                                .ToListAsync();
         }
 
-        public Task<IEnumerable<Album>> GetAlbumsByParentAlbumIdAsync(Guid? parentAlbumId)
+        /// <inheritdoc/>
+        public Album CreateNewAlbum(string albumName, string albumDescription, Guid currentUserId, Guid? parentAlbumId = null)
         {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrWhiteSpace(albumDescription)) throw new ArgumentNullException(nameof(albumDescription));
 
-        public Task UpdateAlbumAsync(Album albumToUpdate)
-        {
-            throw new NotImplementedException();
+            var newAlbum = new Album
+            {
+                Id = Guid.NewGuid(),
+                Name = albumDescription,
+                Description = albumDescription,
+                CreatedById = currentUserId,
+                ParentAlbumId = parentAlbumId,
+            };
+
+            context.Albums.Add(newAlbum);
+
+            return newAlbum;
         }
     }
 }

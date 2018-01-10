@@ -24,7 +24,7 @@ namespace Jiggle.Core.AssetManagement.Import
 
             var album = options.ExistingAlbumId.HasValue
                 ? await albumManager.GetAlbumByIdAsync(options.ExistingAlbumId.Value)
-                : await albumManager.CreateNewAlbumAsync(options.NewAlbumTitle, options.NewAlbumDescription);
+                : albumManager.CreateNewAlbum(options.NewAlbumTitle, options.NewAlbumDescription);
 
             var asset = new Asset
             {
