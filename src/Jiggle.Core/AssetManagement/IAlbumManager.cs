@@ -17,17 +17,15 @@ namespace Jiggle.Core.AssetManagement
         /// doesn't exists.
         /// </summary>
         /// <returns>The album.</returns>
-        /// <param name="context">The database context to use.</param>
         /// <param name="albumId">Album identifier (<see cref="Album.Id"/>).</param>
-        Task<Album> GetAlbumByIdAsync(DatabaseContext context, Guid albumId);
+        Task<Album> GetAlbumByIdAsync(Guid albumId);
 
         /// <summary>
         /// Gets all albums by parent album identifier async.
         /// </summary>
         /// <returns>The albums by parent album identifier async.</returns>
-        /// <param name="context">Database context to use.</param>
         /// <param name="parentAlbumId">Parent albums ID or <c>Null</c> for the root albums.</param>
-        Task<IEnumerable<Album>> GetAlbumsByParentAlbumIdAsync(DatabaseContext context, Guid? parentAlbumId);
+        Task<IEnumerable<Album>> GetAlbumsByParentAlbumIdAsync(Guid? parentAlbumId);
 
         /// <summary>
         /// Create a new <see cref="Album"/>.
@@ -36,13 +34,13 @@ namespace Jiggle.Core.AssetManagement
         /// <param name="context">Context.</param>
         /// <param name="albumTitle">Album title.</param>
         /// <param name="albumDescription">Album description.</param>
-        Task<Album> CreateNewAlbumAsync(DatabaseContext context, string albumTitle, string albumDescription, Guid? parentAlbumId = null);
+        Task<Album> CreateNewAlbumAsync(string albumTitle, string albumDescription, Guid? parentAlbumId = null);
 
         /// <summary>
         /// Updates the album asynchronous.
         /// </summary>
-        /// <param name="context">The database context to use.</param>
         /// <param name="albumToUpdate">Album to update.</param>
-        Task UpdateAlbumAsync(DatabaseContext context, Album albumToUpdate);
+        /// 
+        Task UpdateAlbumAsync(Album albumToUpdate);
     }
 }

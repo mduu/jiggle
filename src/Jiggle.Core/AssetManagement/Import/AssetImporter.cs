@@ -7,18 +7,24 @@ namespace Jiggle.Core.AssetManagement.Import
 {
     public class AssetImporter : IAssetImporter
     {
-        readonly IStoreWriter storeWriter;
+        private readonly IStoreWriter storeWriter;
+        private readonly IAlbumManager albumManager;
 
-        public AssetImporter(IStoreWriter storeWriter)
+        public AssetImporter(
+            IStoreWriter storeWriter,
+            IAlbumManager albumManager)
         {
             this.storeWriter = storeWriter ?? throw new ArgumentNullException(nameof(storeWriter));
+            this.albumManager = albumManager ?? throw new ArgumentNullException(nameof(albumManager));
         }
 
-        public Task<Asset> ImportAssetAsync(AssetImportOptions options)
+        public async Task<Asset> ImportAssetAsync(AssetImportOptions options)
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
-			// TODO Find or create album
+            var album = options.ExistingAlbumId.HasValue
+                ? await albumManager.GetAlbumByIdAsync(options.ExistingAlbumId.Value)
+                : await albumManager.CreateNewAlbumAsync(options.NewAlbumTitle, options.NewAlbumDescription);
 
             var asset = new Asset
             {
