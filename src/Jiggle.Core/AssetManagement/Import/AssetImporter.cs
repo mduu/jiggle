@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Jiggle.Core.AssetManagement.FileStore;
 using Jiggle.Core.Entities;
+using System.Collections.Generic;
 
 namespace Jiggle.Core.AssetManagement.Import
 {
@@ -22,15 +23,22 @@ namespace Jiggle.Core.AssetManagement.Import
         {
             if (options == null) throw new ArgumentNullException(nameof(options));
 
+            // TODO Get current user
+
             var album = options.ExistingAlbumId.HasValue
                 ? await albumManager.GetAlbumByIdAsync(options.ExistingAlbumId.Value)
-                : albumManager.CreateNewAlbum(options.NewAlbumTitle, options.NewAlbumDescription);
+                : albumManager.CreateNewAlbum(
+                                   options.NewAlbumName, 
+                                   options.NewAlbumDescription,
+                                   currentUser.Id,
+                                   options.);
 
             var asset = new Asset
             {
                 Id = Guid.NewGuid(),
                 // TODO Initialize asset
             };
+            asset.Albums.Add(new AlbumAsset { AssetId = asset.Id, AlbumId = album.Id });
 
             // TODO Build Thumbnail
 

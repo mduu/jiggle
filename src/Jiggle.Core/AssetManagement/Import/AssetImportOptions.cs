@@ -11,7 +11,8 @@ namespace Jiggle.Core.AssetManagement.Import
             string[] tagnames = null,
             Guid? existingAlbumId = null,
             string newAlbumTitle = null,
-            string newAlbumDescription = null)
+            string newAlbumDescription = null,
+            Guid? parentAlbumId)
         {
             if (existingAlbumId != null && !string.IsNullOrWhiteSpace(newAlbumTitle)) throw new ArgumentException("You can specify an existing or a new album but not both!", nameof(existingAlbumId));
 
@@ -20,15 +21,17 @@ namespace Jiggle.Core.AssetManagement.Import
 
             Tagnames = tagnames;
             ExistingAlbumId = existingAlbumId;
-            NewAlbumTitle = newAlbumTitle;
+            NewAlbumName = newAlbumTitle;
             NewAlbumDescription = newAlbumDescription;
+            ParentAlbumId = parentAlbumId;
         }
 
         public Stream OriginalFileContent { get; } 
         public string Username { get; }
         public string[] Tagnames { get; }
         public Guid? ExistingAlbumId { get; }
-        public string NewAlbumTitle { get; }
+        public string NewAlbumName { get; }
         public string NewAlbumDescription { get;  }
+        public Guid? ParentAlbumId { get; }
     }
 }
