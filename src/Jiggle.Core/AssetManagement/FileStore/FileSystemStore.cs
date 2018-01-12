@@ -27,16 +27,24 @@ namespace Jiggle.Core.AssetManagement.FileStore
         }
 
         /// <inheritdoc/>
-        public async Task<string> WriteThumbnailFileToStoreAsync(Asset asset, Stream thumbnailFileContent, int width, int height)
+        public Tuple<Stream, string> GetThumbnailStream(Asset asset, int width, int height)
         {
-            if (asset == null) throw new ArgumentNullException(nameof(asset));
-            if (thumbnailFileContent == null) throw new ArgumentNullException(nameof(thumbnailFileContent));
-
             var thumbnailFilepath = locationManager.GetPathForThumbnail(asset, width, height);
-            await WriteStreamToFileAsync(thumbnailFileContent, thumbnailFilepath, true);
 
-            return thumbnailFilepath;
+            string folderpath = Path.GetDirectoryName(thumbnailFilepath);
+            if (!Directory.Exists(folderpath))
+            {
+                Directory.CreateDirectory(folderpath);
+            }
 
+            if (File.Exists(thumbnailFilepath))
+            {
+                File.Delete(thumbnailFilepath);
+            }
+
+            return new Tuple<Stream, string>(
+                File.Create(thumbnailFilepath),
+                thumbnailFilepath);
         }
 
         private static async Task WriteStreamToFileAsync(Stream fileContent, string filepath, bool allowUpdate)

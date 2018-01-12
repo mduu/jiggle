@@ -4,6 +4,8 @@ using Jiggle.Core.AssetManagement.FileStore;
 using Jiggle.Core.Entities;
 using Jiggle.Core.Security;
 using Jiggle.Core.Common;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace Jiggle.Core.AssetManagement.Import
 {
@@ -15,6 +17,9 @@ namespace Jiggle.Core.AssetManagement.Import
         private readonly ITagManager tagManager;
         private readonly DatabaseContext context;
         readonly IThumbnailGenerator thumbnailGenerator;
+
+        const int ThumbnailWidth = 200;
+        const int ThumbnailHeight = 200;
 
         public AssetImporter(
             DatabaseContext context,
@@ -59,15 +64,28 @@ namespace Jiggle.Core.AssetManagement.Import
                 });
             }
 
+            // Write original
+            asset.StorageInfoOriginal = await storeWriter.WriteOriginalFileToStoreAsync(asset, importOptions.OriginalFileContent);
 
-            var locationInfoOriginal = storeWriter.WriteOriginalFileToStoreAsync(asset, importOptions.OriginalFileContent);
+            // Write thumbnail
+            var thumbnail = storeWriter.GetThumbnailStream(asset, ThumbnailWidth, ThumbnailHeight);
 
-            var tumbnail = thumbnailGenerator.GenerateAsync()
-            // TODO Write thumbnail file
+            importOptions.OriginalFileContent.Seek(0, System.IO.SeekOrigin.Begin);
+            var binaryReader = new BinaryReader(importOptions.OriginalFileContent);
+            var originalDataLength = (int)importOptions.OriginalFileContent.Length;
+            var originalData = binaryReader.ReadBytes(originalDataLength);
 
-            // TODO Store asset in database
+            await thumbnailGenerator.GenerateAsync(
+                originalData,
+                ThumbnailWidth,
+                ThumbnailHeight,
+                thumbnail.Item1);
 
-            throw new NotImplementedException();
+            asset.StorageInfoThumbnails = thumbnail.Item2;
+
+            context.Assets.Add(asset);
+
+            return asset;
         }
 
         private async Task<Album> GetAlbumAsync(User currentUser, AssetImportOptions importOptions)

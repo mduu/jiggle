@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Jiggle.Core.Entities;
 using System.Collections.Generic;
 using Jiggle.Core.AssetManagement.FileStore;
+using System;
 
 namespace Jiggle.Core.Tests.AssetManagement
 {
@@ -18,11 +19,9 @@ namespace Jiggle.Core.Tests.AssetManagement
             return asset.OriginalFileName;
         }
 
-        public async Task<string> WriteThumbnailFileToStoreAsync(Asset asset, Stream thumbnailFileContent, int width, int height)
+        public Tuple<Stream, string> GetThumbnailStream(Asset asset, int width, int height)
         {
-            WrittenThumbnailAssets.Add(asset);
- 
-            return asset.OriginalFileName;
+            throw new NotImplementedException();
         }
     }
 }
