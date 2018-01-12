@@ -27,11 +27,12 @@ namespace Jiggle.Core.AssetManagement.Import
         }
 
         public Stream OriginalFileContent { get; } 
-        public string Username { get; }
         public string[] Tagnames { get; }
         public Guid? ExistingAlbumId { get; }
         public string NewAlbumName { get; }
         public string NewAlbumDescription { get;  }
         public Guid? ParentAlbumId { get; }
+        public DateTimeOffset TakenTime { get; set; }
+        public string TakenBy { get; set; }
     }
 }

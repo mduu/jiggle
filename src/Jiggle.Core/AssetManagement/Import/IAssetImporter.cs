@@ -5,6 +5,6 @@ namespace Jiggle.Core.AssetManagement.Import
 {
     public interface IAssetImporter
     {
-        Task<Asset> ImportAssetAsync(AssetImportOptions options);
+        Task<Asset> ImportAssetAsync(string currentUsername, AssetImportOptions importOptions);
     }
 }
