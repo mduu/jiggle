@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Jiggle.Core.AssetManagement.FileStore;
 using System;
 
-namespace Jiggle.Core.Tests.AssetManagement
+namespace Jiggle.Core.Tests.Testing
 {
     public class MockStoreWriter : IStoreWriter
     {
