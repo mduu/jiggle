@@ -82,35 +82,21 @@ namespace Jiggle.Core.Tests.AssetManagement
         }
 
         [Fact]
-        public async Task Test_WriteThumbnailFileToStoreAsync()
+        public void Test_WriteThumbnailFileToStore()
         {
             // Arrange
 
             // Act
-            var locationInfo = await store.WriteThumbnailFileToStoreAsync(testAsset, testImageContent, 200, 150);
+            var output = store.GetThumbnailStream(testAsset, 200, 150);
+            output.Item1.WriteByte(0x12);
+            output.Item1.WriteByte(0x13);
+            output.Item1.Dispose();
 
             // Assert
             CheckFiles(
-                locationInfo,
+                output.Item2,
                 Path.Combine(thumbRootFilepath, "2018/1/20/MyPic_200_150.jpg"),
                 Path.Combine(originalRootFilepath, "2018/1/20/MyPic.jpg"));
-        }
-
-        [Fact]
-        public async Task Test_WriteThumbnailFileToStoreAsync_Override_Thumbnail()
-        {
-            // Arrange
-
-            // Act
-            var locationInfo = await store.WriteThumbnailFileToStoreAsync(testAsset, testImageContent, 200, 150);
-            var locationInfo2 = await store.WriteThumbnailFileToStoreAsync(testAsset, testImageContent, 200, 150);
-
-            // Assert
-            CheckFiles(
-                locationInfo,
-                Path.Combine(thumbRootFilepath, "2018/1/20/MyPic_200_150.jpg"),
-                Path.Combine(originalRootFilepath, "2018/1/20/MyPic.jpg"));
-            Assert.Equal(locationInfo2, locationInfo);
         }
 
         private void CheckFiles(string locationInfo, string filepathThatMustExists, string filepathThatMustNotExists)

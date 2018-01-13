@@ -1,29 +1,26 @@
 ﻿using System;
 using Jiggle.Core.Common;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Jiggle.Core.Tests.Testing
 {
     public class DatabaseFixture: IDisposable
     {
         public DatabaseContext DatabaseContext { get; private set; }
-        protected IDbContextTransaction Transaction { get; private set; } 
 
         public DatabaseFixture()
         {
-            DatabaseContext = new DatabaseContext(new DbContextOptions<DatabaseContext>());
-            Transaction = DatabaseContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadUncommitted);
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+            var options = new DbContextOptionsBuilder<DatabaseContext>()
+                .UseSqlite(connection)
+                .Options;
+            DatabaseContext = new DatabaseContext(options);
         }
 
         public void Dispose()
         {
-            if (Transaction != null)
-            {
-                Transaction.Rollback();
-                Transaction = null;
-            }
-
             if (DatabaseContext != null)
             {
                 DatabaseContext.Dispose();
