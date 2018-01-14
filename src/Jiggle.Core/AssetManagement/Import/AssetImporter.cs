@@ -4,11 +4,14 @@ using Jiggle.Core.AssetManagement.FileStore;
 using Jiggle.Core.Entities;
 using Jiggle.Core.Security;
 using Jiggle.Core.Common;
-using System.ComponentModel.DataAnnotations;
 using System.IO;
 
 namespace Jiggle.Core.AssetManagement.Import
 {
+    /// <summary>
+    /// Implements <see cref="IAssetImporter"/>.
+    /// </summary>
+    /// <seealso cref="IAssetImporter"/>
     public class AssetImporter : IAssetImporter
     {
         private readonly IStoreWriter storeWriter;
@@ -21,6 +24,9 @@ namespace Jiggle.Core.AssetManagement.Import
         const int ThumbnailWidth = 200;
         const int ThumbnailHeight = 200;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:Jiggle.Core.AssetManagement.Import.AssetImporter"/> class.
+        /// </summary>
         public AssetImporter(
             DatabaseContext context,
             IStoreWriter storeWriter,
@@ -37,6 +43,7 @@ namespace Jiggle.Core.AssetManagement.Import
             this.thumbnailGenerator = thumbnailGenerator ?? throw new ArgumentNullException(nameof(thumbnailGenerator));
         }
 
+        /// <inheritdoc/>
         public async Task<Asset> ImportAssetAsync(string currentUsername, AssetImportOptions importOptions)
         {
             if (importOptions == null) throw new ArgumentNullException(nameof(importOptions));
@@ -51,23 +58,53 @@ namespace Jiggle.Core.AssetManagement.Import
                 TakenTime = importOptions.TakenTime,
             };
 
-            var album = await GetAlbumAsync(currentUser, importOptions);
-            asset.Albums.Add(new AlbumAsset { AssetId = asset.Id, AlbumId = album.Id });
+            await AddAlbumAsync(importOptions, currentUser, asset);
+            AssignTags(importOptions, asset);
+            asset.StorageInfoOriginal = await storeWriter.WriteOriginalFileToStoreAsync(asset, importOptions.OriginalFileContent);
+            await GenerateAndStoreThumbnailAsync(importOptions, asset);
 
+            context.Assets.Add(asset);
+
+            return asset;
+        }
+
+        private async Task AddAlbumAsync(AssetImportOptions importOptions, User currentUser, Asset asset)
+        {
+            asset.Albums.Add(new AlbumAsset
+            {
+                AssetId = asset.Id,
+                AlbumId = await FindOrCreateAlbumAsync(currentUser, importOptions)
+            });
+        }
+
+        private async Task<Guid> FindOrCreateAlbumAsync(User currentUser, AssetImportOptions importOptions)
+        {
+            var album = importOptions.ExistingAlbumId.HasValue
+                ? await albumManager.GetAlbumByIdAsync(importOptions.ExistingAlbumId.Value)
+                : albumManager.CreateNewAlbum(
+                                         importOptions.NewAlbumName,
+                                         importOptions.NewAlbumDescription,
+                                         currentUser.Id,
+                                         importOptions.ParentAlbumId);
+
+            return album.Id;
+        }
+
+        private void AssignTags(AssetImportOptions importOptions, Asset asset)
+        {
             foreach (var tag in tagManager.GetTagsByName(importOptions.Tagnames))
             {
-                asset.Tags.Add(new TagAsset 
+                asset.Tags.Add(new TagAsset
                 {
                     Id = Guid.NewGuid(),
                     TagId = tag.Id,
                     AssetId = asset.Id,
                 });
             }
+        }
 
-            // Write original
-            asset.StorageInfoOriginal = await storeWriter.WriteOriginalFileToStoreAsync(asset, importOptions.OriginalFileContent);
-
-            // Write thumbnail
+        private async Task GenerateAndStoreThumbnailAsync(AssetImportOptions importOptions, Asset asset)
+        {
             var thumbnail = storeWriter.GetThumbnailStream(asset, ThumbnailWidth, ThumbnailHeight);
 
             importOptions.OriginalFileContent.Seek(0, System.IO.SeekOrigin.Begin);
@@ -82,21 +119,6 @@ namespace Jiggle.Core.AssetManagement.Import
                 thumbnail.Item1);
 
             asset.StorageInfoThumbnails = thumbnail.Item2;
-
-            context.Assets.Add(asset);
-
-            return asset;
-        }
-
-        private async Task<Album> GetAlbumAsync(User currentUser, AssetImportOptions importOptions)
-        {
-            return importOptions.ExistingAlbumId.HasValue
-                ? await albumManager.GetAlbumByIdAsync(importOptions.ExistingAlbumId.Value)
-                : albumManager.CreateNewAlbum(
-                                         importOptions.NewAlbumName,
-                                         importOptions.NewAlbumDescription,
-                                         currentUser.Id,
-                                         importOptions.ParentAlbumId);
         }
     }
 }

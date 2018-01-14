@@ -21,4 +21,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="2.0.0-preview1-final" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="AssetManagement\Import\IAssetWriter.cs" />
+  </ItemGroup>
 </Project>
