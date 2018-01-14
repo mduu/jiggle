@@ -17,6 +17,7 @@ namespace Jiggle.Core.Tests.Testing
                 .UseSqlite(connection)
                 .Options;
             DatabaseContext = new DatabaseContext(options);
+            DatabaseContext.Database.EnsureCreated();
         }
 
         public void Dispose()
