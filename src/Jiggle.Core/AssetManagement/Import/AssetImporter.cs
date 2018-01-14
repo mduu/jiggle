@@ -20,14 +20,13 @@ namespace Jiggle.Core.AssetManagement.Import
         private readonly ITagManager tagManager;
         private readonly DatabaseContext context;
         readonly IThumbnailGenerator thumbnailGenerator;
-
-        const int ThumbnailWidth = 200;
-        const int ThumbnailHeight = 200;
+        readonly IThumbnailSettings thumbnailSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Jiggle.Core.AssetManagement.Import.AssetImporter"/> class.
         /// </summary>
         public AssetImporter(
+            IThumbnailSettings thumbnailSettings,
             DatabaseContext context,
             IStoreWriter storeWriter,
             IAlbumManager albumManager,
@@ -35,6 +34,7 @@ namespace Jiggle.Core.AssetManagement.Import
             IUserService userService,
             IThumbnailGenerator thumbnailGenerator)
         {
+            this.thumbnailSettings = thumbnailSettings ?? throw new ArgumentNullException(nameof(thumbnailSettings));
             this.context = context ?? throw new ArgumentNullException(nameof(context));
             this.storeWriter = storeWriter ?? throw new ArgumentNullException(nameof(storeWriter));
             this.albumManager = albumManager ?? throw new ArgumentNullException(nameof(albumManager));
@@ -105,20 +105,23 @@ namespace Jiggle.Core.AssetManagement.Import
 
         private async Task GenerateAndStoreThumbnailAsync(AssetImportOptions importOptions, Asset asset)
         {
-            var thumbnail = storeWriter.GetThumbnailStream(asset, ThumbnailWidth, ThumbnailHeight);
+            var thumbnail = storeWriter.GetThumbnailStream(
+                asset, 
+                thumbnailSettings.ThumbnailWidth, 
+                thumbnailSettings.ThumbnailHeight);
 
-            importOptions.OriginalFileContent.Seek(0, System.IO.SeekOrigin.Begin);
+            importOptions.OriginalFileContent.Seek(0, SeekOrigin.Begin);
             var binaryReader = new BinaryReader(importOptions.OriginalFileContent);
             var originalDataLength = (int)importOptions.OriginalFileContent.Length;
             var originalData = binaryReader.ReadBytes(originalDataLength);
 
             await thumbnailGenerator.GenerateAsync(
                 originalData,
-                ThumbnailWidth,
-                ThumbnailHeight,
+                thumbnailSettings.ThumbnailWidth,
+                thumbnailSettings.ThumbnailHeight,
                 thumbnail.Item1);
 
-            asset.StorageInfoThumbnails = thumbnail.Item2;
+            asset.StorageInfoThumbnails =   thumbnail.Item2;
         }
     }
 }

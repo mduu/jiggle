@@ -1,12 +1,13 @@
 using System;
-using Xunit;
 using System.Threading.Tasks;
-using Jiggle.Core.AssetManagement.Import;
-using Jiggle.Core.AssetManagement.FileStore;
-using Jiggle.Core.Tests.Testing;
-using Jiggle.Core.AssetManagement;
 using FakeItEasy;
+using Jiggle.Core.AssetManagement;
+using Jiggle.Core.AssetManagement.FileStore;
+using Jiggle.Core.AssetManagement.Import;
+using Jiggle.Core.Common;
 using Jiggle.Core.Security;
+using Jiggle.Core.Tests.Testing;
+using Xunit;
 
 namespace Jiggle.Core.Tests.AssetManagement
 {
@@ -14,6 +15,7 @@ namespace Jiggle.Core.Tests.AssetManagement
     public class AssetImporterTests
     {
         private DatabaseFixture fixture;
+        private JiggleSettings jiggleSettings = new JiggleSettings();
         private IStoreWriter storeWriter;
         private IAlbumManager albumManager;
         private ITagManager tagManager;
@@ -31,6 +33,7 @@ namespace Jiggle.Core.Tests.AssetManagement
             userService = A.Fake<IUserService>();
             thumbnailGenerator = A.Fake<IThumbnailGenerator>();
             assetImporter = new AssetImporter(
+                jiggleSettings,
                 fixture.DatabaseContext,
                 storeWriter,
                 albumManager,
