@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Jiggle.Core.Common;
 
 namespace Jiggle.Core.Entities
 {
-    public class LabelAsset
+    public class LabelAsset: EntityBase
     {
         [Required]
         public Guid LabelId { get; set; }
