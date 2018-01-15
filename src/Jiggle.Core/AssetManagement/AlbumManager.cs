@@ -47,7 +47,7 @@ namespace Jiggle.Core.AssetManagement
             var newAlbum = new Album
             {
                 Id = Guid.NewGuid(),
-                Name = albumDescription,
+                Name = albumName,
                 Description = albumDescription,
                 CreatedById = currentUserId,
                 ParentAlbumId = parentAlbumId,
