@@ -9,9 +9,11 @@ namespace Jiggle.Core.Tests.Testing
     {
         public DatabaseContext DatabaseContext { get; private set; }
 
+        private SqliteConnection connection;
+
         public DatabaseFixture()
         {
-            var connection = new SqliteConnection("DataSource=:memory:");
+            connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
             var options = new DbContextOptionsBuilder<DatabaseContext>()
                 .UseSqlite(connection)
@@ -26,6 +28,12 @@ namespace Jiggle.Core.Tests.Testing
             {
                 DatabaseContext.Dispose();
                 DatabaseContext = null;
+            }
+
+            if (connection != null)
+            {
+                connection.Close();
+                connection = null;
             }
         }
     }
