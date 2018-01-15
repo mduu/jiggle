@@ -19,5 +19,7 @@
   <ItemGroup>
     <Folder Include="AssetManagement\" />
     <Folder Include="Testing\" />
+    <Folder Include="AssetManagement\FileStore\" />
+    <Folder Include="AssetManagement\Import\" />
   </ItemGroup>
 </Project>

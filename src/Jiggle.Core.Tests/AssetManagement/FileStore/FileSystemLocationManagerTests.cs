@@ -3,7 +3,7 @@ using Xunit;
 using Jiggle.Core.Entities;
 using Jiggle.Core.AssetManagement.FileStore;
 
-namespace Jiggle.Core.Tests.AssetManagement
+namespace Jiggle.Core.Tests.AssetManagement.FileStore
 {
     public class FileSystemLocationManagerTests
     {

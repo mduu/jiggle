@@ -6,7 +6,7 @@ using System.IO;
 using Jiggle.Core.Entities;
 using Jiggle.Core.AssetManagement.FileStore;
 
-namespace Jiggle.Core.Tests.AssetManagement
+namespace Jiggle.Core.Tests.AssetManagement.FileStore
 {
     /// <summary>
     /// Unit-Tests for <see cref="FileSystemStore"/>.
