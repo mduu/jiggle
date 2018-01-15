@@ -25,6 +25,24 @@ namespace Jiggle.Core.Tests.AssetManagement.Import
         public AssetImporterTests(DatabaseFixture fixture)
             : base(fixture)
         {
+            SetUpBasicTestScenario();
+        }
+
+        [Fact]
+        public async Task ImportWithNullOptions()
+        {
+            // Arrage
+
+            // Act
+            var exception = await Assert.ThrowsAsync<ArgumentNullException>(()
+                => assetImporter.ImportAssetAsync("marc", null));
+
+            // Assert
+            Assert.Equal("importOptions", exception.ParamName);
+        }
+
+        private void SetUpBasicTestScenario()
+        {
             storeWriter = new MockStoreWriter();
             albumManager = A.Fake<IAlbumManager>();
             tagManager = A.Fake<ITagManager>();
@@ -39,19 +57,6 @@ namespace Jiggle.Core.Tests.AssetManagement.Import
                 userService,
                 thumbnailGenerator
             );
-        }
-
-        [Fact]
-        public async Task ImportWithNullOptions()
-        {
-            // Arrage
-
-            // Act
-            var exception = await Assert.ThrowsAsync<ArgumentNullException>(() 
-                => assetImporter.ImportAssetAsync("marc", null));
-
-            // Assert
-            Assert.Equal("importOptions", exception.ParamName);
         }
     }
 }
