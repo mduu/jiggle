@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Jiggle.Core.Tests.AssetManagement
 {
-    [Collection("Database collection")]
+    [Collection(DatabaseCollection.CollectionNanem)]
     public class TagManagerTests : DatabaseTestsBase
     {
         private readonly TagManager tagManager;
@@ -15,7 +15,7 @@ namespace Jiggle.Core.Tests.AssetManagement
         public TagManagerTests(DatabaseFixture fixture)
             : base(fixture)
         {
-            tagManager = new TagManager(fixture.DatabaseContext);
+            tagManager = new TagManager(databaseContext);
         }
 
         [Fact]
@@ -25,12 +25,12 @@ namespace Jiggle.Core.Tests.AssetManagement
             var newTags = new[] { "tag1", "tag2" };
 
             // Act
-            var countTagsBefore = fixture.DatabaseContext.Tags.Count();
+            var countTagsBefore = databaseContext.Tags.Count();
             var tags = tagManager.GetTagsByName(newTags).ToList();
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Assert
-            var tagsInDb = fixture.DatabaseContext.Tags.ToList();
+            var tagsInDb = databaseContext.Tags.ToList();
             Assert.Equal(0, countTagsBefore);
             Assert.Equal(2, tagsInDb.Count());
             Assert.Equal(2, tags.Count());
@@ -45,20 +45,20 @@ namespace Jiggle.Core.Tests.AssetManagement
         {
             // Arrange
             var newTags = new[] { "tag1", "tag2" };
-            fixture.DatabaseContext.Tags.AddRange(new Entities.Tag[]
+            databaseContext.Tags.AddRange(new Entities.Tag[]
             {
                 new Tag { Id = Guid.NewGuid(), Name = "tag1" },
                 new Tag { Id = Guid.NewGuid(), Name = "tag2" },
             });
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Act
-            var countTagsBefore = fixture.DatabaseContext.Tags.Count();
+            var countTagsBefore = databaseContext.Tags.Count();
             var tags = tagManager.GetTagsByName(newTags).ToList();
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Assert
-            var tagsInDb = fixture.DatabaseContext.Tags.ToList();
+            var tagsInDb = databaseContext.Tags.ToList();
             Assert.Equal(2, countTagsBefore);
             Assert.Equal(2, tagsInDb.Count());
             Assert.Equal(2, tags.Count());
@@ -73,19 +73,19 @@ namespace Jiggle.Core.Tests.AssetManagement
         {
             // Arrange
             var newTags = new[] { "tag1", "tag2" };
-            fixture.DatabaseContext.Tags.AddRange(new Entities.Tag[]
+            databaseContext.Tags.AddRange(new Entities.Tag[]
             {
                 new Tag { Id = Guid.NewGuid(), Name = "tag1" },
             });
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Act
-            var countTagsBefore = fixture.DatabaseContext.Tags.Count();
+            var countTagsBefore = databaseContext.Tags.Count();
             var tags = tagManager.GetTagsByName(newTags).ToList();
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Assert
-            var tagsInDb = fixture.DatabaseContext.Tags.ToList();
+            var tagsInDb = databaseContext.Tags.ToList();
             Assert.Equal(1, countTagsBefore);
             Assert.Equal(2, tagsInDb.Count());
             Assert.Equal(2, tags.Count());

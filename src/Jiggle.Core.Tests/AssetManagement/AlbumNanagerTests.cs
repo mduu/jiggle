@@ -10,26 +10,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jiggle.Core.Tests.AssetManagement
 {
-    [Collection("Database collection")]
+    [Collection(DatabaseCollection.CollectionNanem)]
     public class AlbumNanagerTests : DatabaseTestsBase
     {
-        private readonly AlbumManager albumManager;
-        private readonly Album album1;
-        private readonly Album album2;
+        private AlbumManager albumManager;
+        private Album album1;
+        private Album album2;
 
         public AlbumNanagerTests(DatabaseFixture fixture)
             : base(fixture)
         {
-            albumManager = new AlbumManager(fixture.DatabaseContext);
-            album1 = CreateAlbum("My Album 1", new[] { "My Childalbum 1", "My Childalbum 2" });
-            album2 = CreateAlbum("My Album 2");
-            fixture.DatabaseContext.SaveChanges();
         }
 
         [Fact]
         public async Task Test_GetAlbumByIdAsync()
         {
             // Arrange
+            SetupDefaultTestScenario();
 
             // Act
             var album = await albumManager.GetAlbumByIdAsync(album1.Id);
@@ -46,6 +43,7 @@ namespace Jiggle.Core.Tests.AssetManagement
         public async Task Test_GetAlbumByIdAsync_InvalidId()
         {
             // Arrange
+            SetupDefaultTestScenario();
 
             // Act
             await Assert.ThrowsAsync<InvalidOperationException>(() => albumManager.GetAlbumByIdAsync(Guid.NewGuid()));
@@ -57,6 +55,7 @@ namespace Jiggle.Core.Tests.AssetManagement
         public async Task Test_GetAlbumsByParentAlbumIdAsync()
         {
             // Arrange
+            SetupDefaultTestScenario();
 
             // Act
             var childAlbums = (await albumManager.GetAlbumsByParentAlbumIdAsync(album1.Id))
@@ -73,6 +72,7 @@ namespace Jiggle.Core.Tests.AssetManagement
         public async Task Test_GetAlbumsByParentAlbumIdAsync_InvalidParent()
         {
             // Arrange
+            SetupDefaultTestScenario();
 
             // Act
             var childAlbums = (await albumManager.GetAlbumsByParentAlbumIdAsync(Guid.NewGuid()))
@@ -86,16 +86,17 @@ namespace Jiggle.Core.Tests.AssetManagement
         public void Test_CreateNewAlbum_WithoutParent()
         {
             // Arrange
+            SetupDefaultTestScenario();
             const string albumname = "New Album";
             const string albumdescription = "Albumdescription";
-            var user = fixture.DatabaseContext.Users.First();
+            var user = databaseContext.Users.First();
 
             // Act
             var album = albumManager.CreateNewAlbum(
                 albumname,
                 albumdescription,
                 user.Id);
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Assert
             Assert.NotNull(album);
@@ -108,9 +109,10 @@ namespace Jiggle.Core.Tests.AssetManagement
         public void Test_CreateNewAlbum_WithParent()
         {
             // Arrange
+            SetupDefaultTestScenario();
             const string albumname = "New Album";
             const string albumdescription = "Albumdescription";
-            var user = fixture.DatabaseContext.Users.First();
+            var user = databaseContext.Users.First();
 
             // Act
             var album = albumManager.CreateNewAlbum(
@@ -118,7 +120,7 @@ namespace Jiggle.Core.Tests.AssetManagement
                 albumdescription,
                 user.Id,
                 album1.Id);
-            fixture.DatabaseContext.SaveChanges();
+            databaseContext.SaveChanges();
 
             // Assert
             Assert.NotNull(album);
@@ -132,9 +134,10 @@ namespace Jiggle.Core.Tests.AssetManagement
         public void Test_CreateNewAlbum_With_Invalid_Parent()
         {
             // Arrange
+            SetupDefaultTestScenario();
             const string albumname = "New Album";
             const string albumdescription = "Albumdescription";
-            var user = fixture.DatabaseContext.Users.First();
+            var user = databaseContext.Users.First();
 
             // Act
             var album = albumManager.CreateNewAlbum(
@@ -143,7 +146,7 @@ namespace Jiggle.Core.Tests.AssetManagement
                 user.Id,
                 Guid.NewGuid());
             
-            Assert.Throws<DbUpdateException>(() => fixture.DatabaseContext.SaveChanges());
+            Assert.Throws<DbUpdateException>(() => databaseContext.SaveChanges());
 
             // Assert
         }
@@ -176,9 +179,17 @@ namespace Jiggle.Core.Tests.AssetManagement
                 ChildAlbums = childAlbums,
             };
 
-            fixture.DatabaseContext.Albums.Add(result);
+            databaseContext.Albums.Add(result);
 
             return result;
+        }
+
+        private void SetupDefaultTestScenario()
+        {
+            albumManager = new AlbumManager(databaseContext);
+            album1 = CreateAlbum("My Album 1", new[] { "My Childalbum 1", "My Childalbum 2" });
+            album2 = CreateAlbum("My Album 2");
+            databaseContext.SaveChanges();
         }
     }
 }

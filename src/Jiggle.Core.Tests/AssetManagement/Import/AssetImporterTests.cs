@@ -11,10 +11,9 @@ using Xunit;
 
 namespace Jiggle.Core.Tests.AssetManagement.Import
 {
-    [Collection("Database collection")]
-    public class AssetImporterTests
+    [Collection(DatabaseCollection.CollectionNanem)]
+    public class AssetImporterTests : DatabaseTestsBase
     {
-        private DatabaseFixture fixture;
         private JiggleSettings jiggleSettings = new JiggleSettings();
         private IStoreWriter storeWriter;
         private IAlbumManager albumManager;
@@ -24,9 +23,8 @@ namespace Jiggle.Core.Tests.AssetManagement.Import
         private IAssetImporter assetImporter;
 
         public AssetImporterTests(DatabaseFixture fixture)
+            : base(fixture)
         {
-            fixture = fixture ?? throw new ArgumentNullException(nameof(fixture));
-
             storeWriter = new MockStoreWriter();
             albumManager = A.Fake<IAlbumManager>();
             tagManager = A.Fake<ITagManager>();
@@ -34,7 +32,7 @@ namespace Jiggle.Core.Tests.AssetManagement.Import
             thumbnailGenerator = A.Fake<IThumbnailGenerator>();
             assetImporter = new AssetImporter(
                 jiggleSettings,
-                fixture.DatabaseContext,
+                databaseContext,
                 storeWriter,
                 albumManager,
                 tagManager,

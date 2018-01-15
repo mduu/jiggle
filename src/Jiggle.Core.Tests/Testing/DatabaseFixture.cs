@@ -1,40 +1,22 @@
 ﻿using System;
-using Jiggle.Core.Common;
 using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 
 namespace Jiggle.Core.Tests.Testing
 {
-    public class DatabaseFixture: IDisposable
+    public class DatabaseFixture : IDisposable
     {
-        public DatabaseContext DatabaseContext { get; private set; }
-
-        private SqliteConnection connection;
+        public SqliteConnection Connection;
 
         public DatabaseFixture()
         {
-            connection = new SqliteConnection("DataSource=:memory:");
-            connection.Open();
-            var options = new DbContextOptionsBuilder<DatabaseContext>()
-                .UseSqlite(connection)
-                .Options;
-            DatabaseContext = new DatabaseContext(options);
-            DatabaseContext.Database.EnsureCreated();
+            Connection = new SqliteConnection("DataSource=:memory:");
+            Connection.Open();
         }
 
         public void Dispose()
         {
-            if (DatabaseContext != null)
-            {
-                DatabaseContext.Dispose();
-                DatabaseContext = null;
-            }
-
-            if (connection != null)
-            {
-                connection.Close();
-                connection = null;
-            }
+            Connection?.Close();
+            Connection = null;
         }
     }
 }
