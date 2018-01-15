@@ -20,13 +20,13 @@ namespace Jiggle.Core.Tests.AssetManagement
         public AlbumNanagerTests(DatabaseFixture fixture)
             : base(fixture)
         {
+            SetupDefaultTestScenario();
         }
 
         [Fact]
         public async Task Test_GetAlbumByIdAsync()
         {
             // Arrange
-            SetupDefaultTestScenario();
 
             // Act
             var album = await albumManager.GetAlbumByIdAsync(album1.Id);
@@ -43,7 +43,6 @@ namespace Jiggle.Core.Tests.AssetManagement
         public async Task Test_GetAlbumByIdAsync_InvalidId()
         {
             // Arrange
-            SetupDefaultTestScenario();
 
             // Act
             await Assert.ThrowsAsync<InvalidOperationException>(() => albumManager.GetAlbumByIdAsync(Guid.NewGuid()));
@@ -55,7 +54,6 @@ namespace Jiggle.Core.Tests.AssetManagement
         public async Task Test_GetAlbumsByParentAlbumIdAsync()
         {
             // Arrange
-            SetupDefaultTestScenario();
 
             // Act
             var childAlbums = (await albumManager.GetAlbumsByParentAlbumIdAsync(album1.Id))
@@ -72,7 +70,6 @@ namespace Jiggle.Core.Tests.AssetManagement
         public async Task Test_GetAlbumsByParentAlbumIdAsync_InvalidParent()
         {
             // Arrange
-            SetupDefaultTestScenario();
 
             // Act
             var childAlbums = (await albumManager.GetAlbumsByParentAlbumIdAsync(Guid.NewGuid()))
@@ -86,7 +83,6 @@ namespace Jiggle.Core.Tests.AssetManagement
         public void Test_CreateNewAlbum_WithoutParent()
         {
             // Arrange
-            SetupDefaultTestScenario();
             const string albumname = "New Album";
             const string albumdescription = "Albumdescription";
             var user = databaseContext.Users.First();
@@ -109,7 +105,6 @@ namespace Jiggle.Core.Tests.AssetManagement
         public void Test_CreateNewAlbum_WithParent()
         {
             // Arrange
-            SetupDefaultTestScenario();
             const string albumname = "New Album";
             const string albumdescription = "Albumdescription";
             var user = databaseContext.Users.First();
@@ -134,7 +129,6 @@ namespace Jiggle.Core.Tests.AssetManagement
         public void Test_CreateNewAlbum_With_Invalid_Parent()
         {
             // Arrange
-            SetupDefaultTestScenario();
             const string albumname = "New Album";
             const string albumdescription = "Albumdescription";
             var user = databaseContext.Users.First();
