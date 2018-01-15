@@ -11,13 +11,13 @@ using Microsoft.EntityFrameworkCore;
 namespace Jiggle.Core.Tests.AssetManagement
 {
     [Collection(DatabaseCollection.CollectionNanem)]
-    public class AlbumNanagerTests : DatabaseTestsBase
+    public class AlbumManagerTests : DatabaseTestsBase
     {
         private AlbumManager albumManager;
         private Album album1;
         private Album album2;
 
-        public AlbumNanagerTests(DatabaseFixture fixture)
+        public AlbumManagerTests(DatabaseFixture fixture)
             : base(fixture)
         {
             SetupDefaultTestScenario();
