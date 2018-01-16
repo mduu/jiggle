@@ -1,8 +1,8 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using FakeItEasy;
 using Jiggle.Core.AssetManagement;
 using Jiggle.Core.AssetManagement.FileStore;
 using Jiggle.Core.AssetManagement.Import;
@@ -11,8 +11,6 @@ using Jiggle.Core.Entities;
 using Jiggle.Core.Security;
 using Jiggle.Core.Tests.Testing;
 using Xunit;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Jiggle.Core.Tests.AssetManagement.Import
 {
