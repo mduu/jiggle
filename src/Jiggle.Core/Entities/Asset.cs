@@ -7,7 +7,6 @@ namespace Jiggle.Core.Entities
 {
     public class Asset : EntityBase
     {
-        [Required]
         public string Title { get; set; }
         public string Description { get; set; }
 

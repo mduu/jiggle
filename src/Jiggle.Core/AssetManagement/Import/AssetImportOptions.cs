@@ -7,16 +7,23 @@ namespace Jiggle.Core.AssetManagement.Import
     {
         public AssetImportOptions(
             Stream originalFileContent, 
+            string originalFilename,
+            DateTimeOffset takenTime,
             string[] tagnames = null,
             Guid? existingAlbumId = null,
             string newAlbumTitle = null,
             string newAlbumDescription = null,
-            Guid? parentAlbumId = null)
+            Guid? parentAlbumId = null,
+            string takenBy = "")
         {
+            if (string.IsNullOrWhiteSpace(originalFilename)) throw new ArgumentNullException(nameof(originalFilename));
             if (existingAlbumId != null && !string.IsNullOrWhiteSpace(newAlbumTitle)) throw new ArgumentException("You can specify an existing or a new album but not both!", nameof(existingAlbumId));
 
             OriginalFileContent = originalFileContent ?? throw new ArgumentNullException(nameof(originalFileContent));
 
+            OriginalFilename = originalFilename;
+            TakenTime = takenTime;
+            TakenBy = takenBy;
             Tagnames = tagnames;
             ExistingAlbumId = existingAlbumId;
             NewAlbumName = newAlbumTitle;
@@ -25,6 +32,7 @@ namespace Jiggle.Core.AssetManagement.Import
         }
 
         public Stream OriginalFileContent { get; } 
+        public string OriginalFilename { get; }
         public string[] Tagnames { get; }
         public Guid? ExistingAlbumId { get; }
         public string NewAlbumName { get; }

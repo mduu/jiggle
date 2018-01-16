@@ -5,6 +5,7 @@ using Jiggle.Core.Entities;
 using Jiggle.Core.Security;
 using Jiggle.Core.Common;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Jiggle.Core.AssetManagement.Import
 {
@@ -46,15 +47,21 @@ namespace Jiggle.Core.AssetManagement.Import
         /// <inheritdoc/>
         public async Task<Asset> ImportAssetAsync(string currentUsername, AssetImportOptions importOptions)
         {
+            if (string.IsNullOrWhiteSpace(currentUsername)) throw new ArgumentNullException(nameof(currentUsername));
             if (importOptions == null) throw new ArgumentNullException(nameof(importOptions));
 
             var currentUser = await userService.GetCurrentUserAsync(currentUsername);
+            var contentType = MIMEAssistant.GetMIMEType("image.JPG");
 
             var asset = new Asset
             {
                 Id = Guid.NewGuid(),
+                OriginalFileName = importOptions.OriginalFilename,
+                OriginalFileMimeType = contentType ?? "application/octet-stream",
                 ImportedBy = currentUser,
-                TakenBy = importOptions.TakenBy,
+                TakenBy = string.IsNullOrWhiteSpace(importOptions.TakenBy)
+                                ? $"{currentUser.Firstname} {currentUser.Lastname}"
+                                : importOptions.TakenBy,
                 TakenTime = importOptions.TakenTime,
             };
 
@@ -70,6 +77,15 @@ namespace Jiggle.Core.AssetManagement.Import
 
         private async Task AddAlbumAsync(AssetImportOptions importOptions, User currentUser, Asset asset)
         {
+            if (importOptions == null) throw new ArgumentNullException(nameof(importOptions));
+            if (currentUser == null) throw new ArgumentNullException(nameof(currentUser));
+            if (asset == null) throw new ArgumentNullException(nameof(asset));
+
+            if (asset.Albums == null)
+            {
+                asset.Albums = new List<AlbumAsset>();
+            }
+
             asset.Albums.Add(new AlbumAsset
             {
                 AssetId = asset.Id,
@@ -79,6 +95,9 @@ namespace Jiggle.Core.AssetManagement.Import
 
         private async Task<Guid> FindOrCreateAlbumAsync(User currentUser, AssetImportOptions importOptions)
         {
+            if (currentUser == null) throw new ArgumentNullException(nameof(currentUser));
+            if (importOptions == null) throw new ArgumentNullException(nameof(importOptions));
+
             var album = importOptions.ExistingAlbumId.HasValue
                 ? await albumManager.GetAlbumByIdAsync(importOptions.ExistingAlbumId.Value)
                 : albumManager.CreateNewAlbum(
@@ -92,8 +111,16 @@ namespace Jiggle.Core.AssetManagement.Import
 
         private void AssignTags(AssetImportOptions importOptions, Asset asset)
         {
+            if (importOptions == null) throw new ArgumentNullException(nameof(importOptions));
+            if (asset == null) throw new ArgumentNullException(nameof(asset));
+
             foreach (var tag in tagManager.GetTagsByName(importOptions.Tagnames))
             {
+                if (asset.Tags == null)
+                {
+                    asset.Tags = new List<TagAsset>();
+                }
+
                 asset.Tags.Add(new TagAsset
                 {
                     Id = Guid.NewGuid(),
@@ -105,6 +132,9 @@ namespace Jiggle.Core.AssetManagement.Import
 
         private async Task GenerateAndStoreThumbnailAsync(AssetImportOptions importOptions, Asset asset)
         {
+            if (importOptions == null) throw new ArgumentNullException(nameof(importOptions));
+            if (asset == null) throw new ArgumentNullException(nameof(asset));
+
             var thumbnail = storeWriter.GetThumbnailStream(
                 asset, 
                 thumbnailSettings.ThumbnailWidth, 
@@ -120,6 +150,9 @@ namespace Jiggle.Core.AssetManagement.Import
                 thumbnailSettings.ThumbnailWidth,
                 thumbnailSettings.ThumbnailHeight,
                 thumbnail.Item1);
+
+            await thumbnail.Item1.FlushAsync();
+            thumbnail.Item1.Close();
 
             asset.StorageInfoThumbnails =   thumbnail.Item2;
         }

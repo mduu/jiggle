@@ -20,6 +20,7 @@
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0002" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="2.0.0-preview1-final" />
+    <PackageReference Include="MimeTypes" Version="1.0.6" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="AssetManagement\Import\IAssetWriter.cs" />

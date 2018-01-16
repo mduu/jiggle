@@ -14,7 +14,7 @@ namespace Jiggle.Core.AssetManagement.FileStore
 
             if (!Directory.Exists(directoryPath))
             {
-                throw new DirectoryNotFoundException($"Directory [{directoryPath}] not found!");
+                return;
             }
 
             // Delete all files
