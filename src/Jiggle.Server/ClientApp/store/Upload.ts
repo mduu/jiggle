@@ -59,7 +59,7 @@ export const actionCreators = {
 
 const unloadedState: UploadState = { existingAlbums: [], isLoading: false };
 
-export const reducer: Reducer<WeatherForecastsState> = (state: WeatherForecastsState, incomingAction: Action) => {
+export const reducer: Reducer<UploadState> = (state: UploadState, incomingAction: Action) => {
     const action = incomingAction as KnownAction;
     switch (action.type) {
         case 'REQUEST_UPLOAD_INITIAL_DATA':

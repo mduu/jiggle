@@ -5,69 +5,45 @@ import { ApplicationState }  from '../store';
 import * as UploadState from '../store/Upload';
 
 // At runtime, Redux will merge together...
-type WeatherForecastProps =
+type UploadProps =
     UploadState.UploadState        // ... state we've requested from the Redux store
     & typeof UploadState.actionCreators      // ... plus action creators we've requested
-    & RouteComponentProps<{ startDateIndex: string }>; // ... plus incoming routing parameters
+    & RouteComponentProps<{}>; // ... plus incoming routing parameters
 
-class Upload extends React.Component<WeatherForecastProps, {}> {
+class Upload extends React.Component<UploadProps, {}> {
     componentWillMount() {
         // This method runs when the component is first added to the page
-        let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 0;
-        this.props.requestUpload(startDateIndex);
+        //let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 0;
+        this.props.requestUploadInitialData();
     }
 
-    componentWillReceiveProps(nextProps: WeatherForecastProps) {
+    componentWillReceiveProps(nextProps: UploadProps) {
         // This method runs when incoming props (e.g., route params) change
-        let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
-        this.props.requestUpload(startDateIndex);
+        // let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
+        this.props.requestUploadInitialData();
     }
 
     public render() {
         return <div>
-            <h1>Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
-            { this.renderForecastsTable() }
-            { this.renderPagination() }
+            <h1>Upload assets</h1>
+            <p>In this screen one can upload new assets like images and videos.</p>
+            { this.renderUploadForm() }
         </div>;
     }
 
-    private renderForecastsTable() {
-        return <table className='table'>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-            {this.props.forecasts.map(forecast =>
-                <tr key={ forecast.dateFormatted }>
-                    <td>{ forecast.dateFormatted }</td>
-                    <td>{ forecast.temperatureC }</td>
-                    <td>{ forecast.temperatureF }</td>
-                    <td>{ forecast.summary }</td>
-                </tr>
-            )}
-            </tbody>
-        </table>;
-    }
-
-    private renderPagination() {
-        let prevStartDateIndex = (this.props.startDateIndex || 0) - 5;
-        let nextStartDateIndex = (this.props.startDateIndex || 0) + 5;
-
-        return <p className='clearfix text-center'>
-            <Link className='btn btn-default pull-left' to={ `/Upload/${ prevStartDateIndex }` }>Previous</Link>
-            <Link className='btn btn-default pull-right' to={ `/Upload/${ nextStartDateIndex }` }>Next</Link>
-            { this.props.isLoading ? <span>Loading...</span> : [] }
-        </p>;
+    private renderUploadForm() {
+        return <form>
+            <label>Existing albums:</label>
+            <select>
+                {this.props.existingAlbums.map(album =>
+                    <option value="{album.id}">{album.name}</option>
+                )}
+            </select>
+        </form>
     }
 }
 
 export default connect(
-    (state: ApplicationState) => state.Upload, // Selects which state properties are merged into the component's props
+    (state: ApplicationState) => state.upload, // Selects which state properties are merged into the component's props
     UploadState.actionCreators                 // Selects which action creators are merged into the component's props
 )(Upload) as typeof Upload;
