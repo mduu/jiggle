@@ -20,7 +20,7 @@ namespace Jiggle.Core.Tests.AssetManagement.Import
         private const string TestUsername = "joe.doe";
         private const string TestUsermailaddress = "joe.doe@test.com";
 
-        private JiggleSettings jiggleSettings = new JiggleSettings();
+        private ThumbnailSettings thumbnailSettings = new ThumbnailSettings(200, 200);
         private IStoreWriter storeWriter;
         private IAlbumManager albumManager;
         private ITagManager tagManager;
@@ -120,7 +120,7 @@ namespace Jiggle.Core.Tests.AssetManagement.Import
             userService = new UserService(databaseContext, userByUsernameQuery);
             thumbnailGenerator = new ThumbnailGenerator() as IThumbnailGenerator;
             assetImporter = new AssetImporter(
-                jiggleSettings,
+                thumbnailSettings,
                 databaseContext,
                 storeWriter,
                 albumManager,

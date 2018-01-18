@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Jiggle.Core;
+using Jiggle.Core.AssetManagement;
+using Jiggle.Core.AssetManagement.FileStore;
 using Jiggle.Core.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,10 +28,14 @@ namespace server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
             services.AddDbContext<DatabaseContext>(options => options.UseSqlite("Data Source=Jiggle.db"));
-
-            services.AddJiggleCore();
+            services.AddJiggleCore(
+                new ThumbnailSettings(200, 200), // TODO
+                new FileSystemConfiguration(
+                    "",  // TODO
+                    ""   // TODO
+                )
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

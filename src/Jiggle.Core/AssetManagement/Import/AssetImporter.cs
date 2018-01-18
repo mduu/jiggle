@@ -21,13 +21,13 @@ namespace Jiggle.Core.AssetManagement.Import
         private readonly ITagManager tagManager;
         private readonly DatabaseContext context;
         readonly IThumbnailGenerator thumbnailGenerator;
-        readonly IThumbnailSettings thumbnailSettings;
+        readonly ThumbnailSettings thumbnailSettings;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Jiggle.Core.AssetManagement.Import.AssetImporter"/> class.
         /// </summary>
         public AssetImporter(
-            IThumbnailSettings thumbnailSettings,
+            ThumbnailSettings thumbnailSettings,
             DatabaseContext context,
             IStoreWriter storeWriter,
             IAlbumManager albumManager,
