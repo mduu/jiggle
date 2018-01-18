@@ -1,5 +1,5 @@
 {
-  "name": "Jiggle Server",
+  "name": "Jiggle.Server",
   "private": true,
   "version": "0.0.0",
   "devDependencies": {
