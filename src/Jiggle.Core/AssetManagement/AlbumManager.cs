@@ -22,10 +22,22 @@ namespace Jiggle.Core.AssetManagement
         }
 
         /// <inheritdoc/>
+        public async Task<IEnumerable<Album>> GetAllNewestAlbumsAsync()
+        {
+            return await context.Albums
+                                .OrderByDescending(a => a.UpdatedAt)
+                                .Include(a => a.CreatedBy)
+                                .Include(a => a.UpdatedBy)
+                                .Take(30)
+                                .ToListAsync();
+        }
+
+        /// <inheritdoc/>
         public async Task<Album> GetAlbumByIdAsync(Guid albumId)
         {
             return await context.Albums
                                 .Include(a => a.CreatedBy)
+                                .Include(a => a.UpdatedBy)
                                 .Include(a => a.ChildAlbums)
                                 .FirstAsync(a => a.Id == albumId);
         }
@@ -35,6 +47,7 @@ namespace Jiggle.Core.AssetManagement
         {
             return await context.Albums
                                 .Include(a => a.CreatedBy)
+                                .Include(a => a.UpdatedBy)
                                 .Where(a => a.ParentAlbumId == parentAlbumId)
                                 .ToListAsync();
         }
@@ -49,7 +62,10 @@ namespace Jiggle.Core.AssetManagement
                 Id = Guid.NewGuid(),
                 Name = albumName,
                 Description = albumDescription,
+                CreatedAt = DateTimeOffset.Now,
                 CreatedById = currentUserId,
+                UpdatedById = currentUserId,
+                UpdatedAt = DateTimeOffset.Now,
                 ParentAlbumId = parentAlbumId,
             };
 

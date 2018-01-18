@@ -12,6 +12,12 @@ namespace Jiggle.Core.AssetManagement
     public interface IAlbumManager
     {
         /// <summary>
+        /// Gets all newest albums async.
+        /// </summary>
+        /// <returns>All newest albums.</returns>
+        Task<IEnumerable<Album>> GetAllNewestAlbumsAsync();
+
+        /// <summary>
         /// Gets the album by identifier. Throws an exception if the album
         /// doesn't exists.
         /// </summary>

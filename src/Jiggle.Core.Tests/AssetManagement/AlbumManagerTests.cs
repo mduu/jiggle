@@ -162,6 +162,9 @@ namespace Jiggle.Core.Tests.AssetManagement
                     Id = Guid.NewGuid(),
                     Name = n,
                     CreatedBy = user,
+                    CreatedAt = DateTimeOffset.Now,
+                    UpdatedBy = user,
+                    UpdatedAt = DateTimeOffset.Now,
                 }).ToList();
             }
 
@@ -170,6 +173,9 @@ namespace Jiggle.Core.Tests.AssetManagement
                 Id = Guid.NewGuid(),
                 Name = albumName,
                 CreatedBy = user,
+                CreatedAt = DateTimeOffset.Now,
+                UpdatedBy = user,
+                UpdatedAt = DateTimeOffset.Now,
                 ChildAlbums = childAlbums,
             };
 

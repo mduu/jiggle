@@ -15,6 +15,16 @@ namespace Jiggle.Core.Entities
         public Guid CreatedById { get; set; }
         public User CreatedBy { get; set; }
 
+        [Required]
+        public DateTimeOffset CreatedAt { get; set; }
+
+        [Required]
+        public Guid UpdatedById { get; set; }
+        public User UpdatedBy { get; set; }
+
+        [Required]
+        public DateTimeOffset UpdatedAt { get; set; }
+
         public Guid? ParentAlbumId { get; set; }
         public Album ParentAlbum { get; set; }
 
