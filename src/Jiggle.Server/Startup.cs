@@ -32,8 +32,8 @@ namespace server
             services.AddJiggleCore(
                 new ThumbnailSettings(200, 200), // TODO
                 new FileSystemConfiguration(
-                    "",  // TODO
-                    ""   // TODO
+                    Configuration["AssetManagement:OriginalsRootPath"],
+                    Configuration["AssetManagement:ThumbnailsRootPath"]
                 )
             );
         }
