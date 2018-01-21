@@ -1,19 +1,20 @@
 ﻿import * as React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
+import { IUploadInitialData } from 'IUploadInitialData';
 
 // At runtime, Redux will merge together...
 type UploadProps =
+    IUploadInitialData
     RouteComponentProps<{}>; // ... plus incoming routing parameters
 
 class UploadPage extends React.Component<UploadProps, {}> {
     componentWillMount() {
         // This method runs when the component is first added to the page
 
-        //let fetchTask = fetch(`api/Upload/InitialData`)
-        //    .then(response => response.json() as Promise<Album[]>)
-        //    .then(data => {
-        //        dispatch({ type: 'RECEIVE_UPLOAD_INITIAL_DATA', existingAlbums: data });
-        //    });
+        let data = 
+        let fetchTask = fetch(`api/Upload/InitialData`)
+            .then(response => return response.json());
+        // TODO
     }
 
     componentWillReceiveProps(nextProps: UploadProps) {
