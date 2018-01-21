@@ -20,7 +20,7 @@ class Upload extends React.Component<UploadProps, {}> {
     componentWillReceiveProps(nextProps: UploadProps) {
         // This method runs when incoming props (e.g., route params) change
         // let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
-        this.props.requestUploadInitialData();
+        //this.props.requestUploadInitialData();
     }
 
     public render() {

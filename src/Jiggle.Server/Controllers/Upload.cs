@@ -24,16 +24,16 @@ namespace Jiggle.Server.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<object> InitalData()
+        public async Task<object> InitialData()
         {
             var albums = 
                 (await albumManager.GetAllNewestAlbumsAsync())
                 .Select(a => new AlbumDTO(a));
 
-            return new
+            return Json(new
             {
                 existingAlbums = albums,
-            };
+            });
         }
 
         public class AlbumDTO
