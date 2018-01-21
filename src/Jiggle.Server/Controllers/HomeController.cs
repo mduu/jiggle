@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Jiggle.Server.Core;
 
-namespace server.Controllers
+namespace Jiggle.Server.Controllers
 {
     public class HomeController : JiggleControllerBase
     {
