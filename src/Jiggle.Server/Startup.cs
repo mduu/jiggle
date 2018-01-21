@@ -12,17 +12,22 @@ using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Jiggle.Server.Core;
 
 namespace server
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(
+            IHostingEnvironment env, 
+            IConfiguration configuration)
         {
+            CurrentEnvironment = env;
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment CurrentEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,8 +37,8 @@ namespace server
             services.AddJiggleCore(
                 new ThumbnailSettings(200, 200), // TODO
                 new FileSystemConfiguration(
-                    Configuration["AssetManagement:OriginalsRootPath"],
-                    Configuration["AssetManagement:ThumbnailsRootPath"]
+                    CurrentEnvironment.MapPath(Configuration["AssetManagement:OriginalsRootPath"]),
+                    CurrentEnvironment.MapPath(Configuration["AssetManagement:ThumbnailsRootPath"])
                 )
             );
         }
