@@ -9,6 +9,7 @@ using Jiggle.Core.AssetManagement.Import;
 
 namespace Jiggle.Server.Controllers
 {
+    [Route("api/[controller]")]
     public class Upload : Controller
     {
         private readonly IAlbumManager albumManager;
@@ -23,16 +24,16 @@ namespace Jiggle.Server.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> InitalData()
+        public async Task<object> InitalData()
         {
             var albums = 
                 (await albumManager.GetAllNewestAlbumsAsync())
                 .Select(a => new AlbumDTO(a));
 
-            return Json(new
+            return new
             {
                 existingAlbums = albums,
-            });
+            };
         }
 
         public class AlbumDTO
