@@ -6,6 +6,7 @@
     "jquery": "3.2.1",
     "popper.js": "^1.12.9",
     "jquery-validation": "1.14.0",
-    "jquery-validation-unobtrusive": "3.2.6"
+    "jquery-validation-unobtrusive": "3.2.6",
+    "knockout": "^3.4.2"
   }
 }
