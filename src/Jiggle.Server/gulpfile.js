@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='default' /
+/// <binding AfterBuild='default' />
 
 var gulp = require("gulp");
 var rimraf = require("rimraf");
