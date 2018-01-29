@@ -15,4 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Jiggle.Core\Jiggle.Core.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="scripts\" />
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
 </Project>
