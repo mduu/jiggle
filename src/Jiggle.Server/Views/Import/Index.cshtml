@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    Import new asssets.
+</p>
+
+<form method="post">
+
+    <div class="form-group">
+        <label for="existingAlbum">Album:</label>
+        <select id="existingAlbum" class="form-control">
+            <option value="-">[New album]</option>
+            <option value="test">Test 1</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="newAlbumname">New albumname:</label>
+        <input id="newAlbumname" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="tags">Tags:</label>
+        <input id="tags" type="text" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="takenTime">Taken at:</label>
+        <input id="takenTime" type="datetime" class="form-control" placeholder="dd.MM.yyyy" />
+    </div>
+
+    <div class="form-group">
+        <label for="takenBy">Photographer:</label>
+        <input id="takenBy" type="datetime" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="originalFilenames">Files:</label>
+        <input id="originalFilenames" type="file" multiple required class="form-control" />
+    </div>
+
+</form>
+

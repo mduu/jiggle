@@ -19,13 +19,13 @@
 <body class="text-center">
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-            
+
         <header class="masthead mb-auto">
             <div class="inner">
                 <h3 class="masthead-brand">Jiggle!</h3>
                 <nav class="nav nav-masthead justify-content-center">
-                    <a class="nav-link active" href="#">Home</a>
-                    <a class="nav-link" href="#">Import</a>
+                    <a class="nav-link active" href="@Url.Action("Index", "Home")">Home</a>
+                    <a class="nav-link" href="@Url.Action("Index", "Import")">Import</a>
                     <a class="nav-link" href="#">About</a>
                 </nav>
             </div>
@@ -41,7 +41,7 @@
                 <p>Jiggle on <a href="https://github.com/mduu/jiggle">GitHub</a>, by <a href="https://twitter.com/marcduerst">@@marcduerst</a>. Version: x.y </p>
             </div>
         </footer>
-            
+
     </div>
 
     <environment include="Development">
