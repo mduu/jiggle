@@ -22,8 +22,7 @@ paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/bundle.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
 paths.tsFiles = [
-    paths.scripts + "main.ts",
-    paths.scripts + "greet.ts",
+    paths.scripts + "main.ts"
 ];
 
 gulp.task("clean:js", function (cb) {

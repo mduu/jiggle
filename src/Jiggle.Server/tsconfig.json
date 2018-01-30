@@ -4,5 +4,6 @@
     "noEmitOnError": true,
     "sourceMap": true,
     "target": "es5"
-  }
+  },
+  "compileOnSave": false
 }
