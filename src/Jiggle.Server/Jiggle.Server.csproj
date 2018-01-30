@@ -2,7 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="scripts\Import.ts" />
+    <None Remove="scripts\viewModelBase.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
@@ -17,7 +23,10 @@
     <ProjectReference Include="..\Jiggle.Core\Jiggle.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="scripts\" />
     <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="scripts\import.ts" />
+    <TypeScriptCompile Include="scripts\viewModelBase.ts" />
   </ItemGroup>
 </Project>
