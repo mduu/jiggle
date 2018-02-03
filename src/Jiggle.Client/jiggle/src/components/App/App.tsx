@@ -1,15 +1,11 @@
 import * as React from 'react';
+import Menu from './Menu';
 import './App.css';
-
-const logo = require('./logo.svg');
 
 const App = ({}) => (
 
   <div className="App">
-    <aside className="sidebar-menu">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h2>Menu</h2>
-    </aside>
+    <Menu />
 
     <section className="main-content">
 

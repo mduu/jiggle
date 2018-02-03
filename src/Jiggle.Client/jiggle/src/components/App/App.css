@@ -10,14 +10,6 @@ body {
   height: 100vh;
 }
 
-.App aside.sidebar-menu {
-  flex: 0 1 120px;
-  padding: .5em;
-  background-color: rgb(36, 36, 36);
-  border-right: #444 2px solid;
-  height: 100vh;
-}
-
 section.main-content {
   flex: 1 1 auto;
   padding: .7em;

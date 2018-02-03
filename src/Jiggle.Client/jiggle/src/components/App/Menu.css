@@ -1,0 +1,25 @@
+.App aside.sidebar-menu {
+    flex: 0 1 120px;
+    padding: 5px;
+    background-color: rgb(31, 31, 31);
+    border-right: #333 2px solid;
+    height: 100vh;
+}
+
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.main-menu .main-menu-item {
+    border: #333 1px solid;
+    padding: 10px;
+    flex: 1 1 0;
+    margin: 3px 5px;
+    cursor: pointer;
+}
+
+.main-menu .main-menu-item:hover {
+    background-color: rgb(48, 48, 48);
+}
