@@ -3,13 +3,18 @@ import * as React from 'react';
 export interface MenuItemProps {
     text: string;
     faIconName: string;
+    isSelected: boolean;
 }
 
 const MenuItem = (props: MenuItemProps) => {
-    let cssClass = 'fas fa-fw ' + props.faIconName; 
+    let cssClassIcon = 'fas fa-fw ' + props.faIconName;
+    let cssClassDiv = 'main-menu-item';
+    if (props.isSelected) {
+        cssClassDiv += ' selected';
+    }
 
     return (
-        <div className="main-menu-item"><i className={cssClass} />&nbsp;{props.text}</div>
+        <div className={cssClassDiv} ><i className={cssClassIcon} />&nbsp;{props.text}</div>
     );
 };
 

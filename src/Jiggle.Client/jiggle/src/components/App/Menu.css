@@ -23,3 +23,8 @@
 .main-menu .main-menu-item:hover {
     background-color: rgb(48, 48, 48);
 }
+
+.main-menu .main-menu-item.selected {
+    background-color: rgb(71, 71, 71);
+    border-color: #555;
+}
