@@ -1,4 +1,5 @@
 import * as React from 'react';
+import MenuItem  from './MenuItem';
 import './Menu.css';
 
 const logo = require('./logo.svg');
@@ -8,9 +9,12 @@ const Menu = ({}) => (
         <img src={logo} className="App-logo" alt="logo" />
 
         <nav className="main-menu">
-            <div className="main-menu-item">Home</div>
-            <div className="main-menu-item">Faces</div>
-        </nav>
+            <MenuItem text="Home" />
+            <MenuItem text="Import" />
+            <MenuItem text="Faces" />
+            <MenuItem text="Locations" />
+            <MenuItem text="Tags" />
+       </nav>
     </aside>
 );
 
