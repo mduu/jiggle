@@ -9,11 +9,12 @@ const Menu = ({}) => (
         <img src={logo} className="App-logo" alt="logo" />
 
         <nav className="main-menu">
-            <MenuItem text="Home" />
-            <MenuItem text="Import" />
-            <MenuItem text="Faces" />
-            <MenuItem text="Locations" />
-            <MenuItem text="Tags" />
+            <MenuItem text="Home" faIconName="fa-home" />
+            <MenuItem text="Import" faIconName="fa-upload" />
+            <MenuItem text="Albums" faIconName="fa-images" />
+            <MenuItem text="Faces" faIconName="fa-user" />
+            <MenuItem text="Locations" faIconName="fa-map-marker" />
+            <MenuItem text="Tags" faIconName="fa-tags"/>
        </nav>
     </aside>
 );
