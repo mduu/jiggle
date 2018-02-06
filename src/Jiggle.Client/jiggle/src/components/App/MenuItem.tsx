@@ -4,6 +4,7 @@ export interface MenuItemProps {
     text: string;
     faIconName: string;
     isSelected: boolean;
+    onSelect?: () => void;
 }
 
 const MenuItem = (props: MenuItemProps) => {
@@ -14,7 +15,7 @@ const MenuItem = (props: MenuItemProps) => {
     }
 
     return (
-        <div className={cssClassDiv} ><i className={cssClassIcon} />&nbsp;{props.text}</div>
+        <div className={cssClassDiv} onClick={props.onSelect}><i className={cssClassIcon} />&nbsp;{props.text}</div>
     );
 };
 

@@ -25,7 +25,7 @@ export function mainMenuSelectItem(selectedMainMenuItem: string): MainMenu_Selec
 }
 
 // --- Reducers ---
-export function enthusiasm(state: AppStoreState, action: MainMenuAction): AppStoreState {
+export function mainMenu(state: AppStoreState, action: MainMenuAction): AppStoreState {
     switch (action.type) {
         case MAINMENU_SELECTITEM:
             return { ...state, selectedMainMenuItem: action.selectedMainMenuItem };
