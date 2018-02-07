@@ -1,3 +1,5 @@
+import { createStore } from 'redux';
+
 // --- State ---
 export interface AppStoreState {
     selectedMainMenuItem: string;
@@ -33,3 +35,8 @@ export function mainMenu(state: AppStoreState, action: MainMenuAction): AppStore
             return state;
     }
 }
+
+// --- Store ---
+export const appStore = createStore<AppStoreState>(mainMenu, {
+    selectedMainMenuItem: 'home'
+});
