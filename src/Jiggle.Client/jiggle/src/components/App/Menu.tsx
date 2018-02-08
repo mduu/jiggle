@@ -8,9 +8,11 @@ const logo = require('./logo.svg');
 
 export interface MenuProps {
     selectedMainMenuItem: string;
+    onSelectMainMenuItem: (mainMenuItem: string) => void;
 }
 
 const Menu = (props: MenuProps) => (
+    
     <aside className="sidebar-menu">
         <img src={logo} className="App-logo" alt="logo" />
 
@@ -19,37 +21,37 @@ const Menu = (props: MenuProps) => (
                 text="Home" 
                 faIconName="fa-home" 
                 isSelected={props.selectedMainMenuItem === 'home'} 
-                onSelect={() => props.selectedMainMenuItem = 'home'}
+                onSelect={() => props.onSelectMainMenuItem('home')}
             />
             <MenuItem 
                 text="Import" 
                 faIconName="fa-upload" 
                 isSelected={props.selectedMainMenuItem === 'import'} 
-                onSelect={() => props.selectedMainMenuItem = 'import'}
+                onSelect={() => props.onSelectMainMenuItem('import')}
             />
             <MenuItem 
                 text="Albums" 
                 faIconName="fa-images" 
                 isSelected={props.selectedMainMenuItem === 'albums'} 
-                onSelect={() => props.selectedMainMenuItem = 'albums'}
+                onSelect={() => props.onSelectMainMenuItem('albums')}
             />
             <MenuItem 
                 text="Faces" 
                 faIconName="fa-user" 
                 isSelected={props.selectedMainMenuItem === 'faces'} 
-                onSelect={() => props.selectedMainMenuItem = 'faces'}
+                onSelect={() => props.onSelectMainMenuItem('faces')}
             />
             <MenuItem 
                 text="Locations" 
                 faIconName="fa-map-marker" 
                 isSelected={props.selectedMainMenuItem === 'locations'} 
-                onSelect={() => props.selectedMainMenuItem = 'locations'}
+                onSelect={() => props.onSelectMainMenuItem('locations')}
             />
             <MenuItem 
                 text="Tags" 
                 faIconName="fa-tags" 
                 isSelected={props.selectedMainMenuItem === 'tags'} 
-                onSelect={() => props.selectedMainMenuItem = 'tags'}
+                onSelect={() => props.onSelectMainMenuItem('tags')}
             />
        </nav>
     </aside>
@@ -63,7 +65,8 @@ export function mapStateToProps({ selectedMainMenuItem }: AppStore.AppStoreState
 
 export function mapDispatchToProps(dispatch: Dispatch<AppStore.MainMenuAction>) {
     return {
-        onIncrement: (electedMainMenuItem: string) => dispatch(AppStore.mainMenuSelectItem(electedMainMenuItem)),
+        onSelectMainMenuItem: 
+            (electedMainMenuItem: string) => dispatch(AppStore.mainMenuSelectItem(electedMainMenuItem)),
     };
 }
 
