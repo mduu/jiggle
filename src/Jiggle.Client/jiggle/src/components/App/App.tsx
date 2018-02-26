@@ -2,24 +2,9 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import * as AppStore from '../../redux/AppStore';
 import Menu from './Menu';
-import Import from '../Import/Import';
-import './App.css';
+import MainContent from './MainContent';
 
-const mainContant = (selectedMainMenuItem: string) => {
-  switch (selectedMainMenuItem) {
-    case 'import':
-        return <Import />;
-    default:
-        return (
-          <section>
-            <h1 className="App-title">Welcome to Jiggle</h1>
-            <p>
-              Later on here will be an activtiy stream of Jiggle.
-            </p>
-          </section>
-        );
-  }
-};
+import './App.css';
 
 export interface AppProps {
   selectedMainMenuItem: string;
@@ -31,7 +16,7 @@ const App = (props: AppProps) => (
     <Menu />
 
     <section className="main-content">
-      {mainContant(props.selectedMainMenuItem)}
+      <MainContent />
     </section>
   </div>
 );
