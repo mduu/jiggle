@@ -66,7 +66,7 @@ export function mapStateToProps({ selectedMainMenuItem }: AppStore.AppStoreState
 export function mapDispatchToProps(dispatch: Dispatch<AppStore.MainMenuAction>) {
     return {
         onSelectMainMenuItem: 
-            (electedMainMenuItem: string) => dispatch(AppStore.mainMenuSelectItem(electedMainMenuItem)),
+            (selectedMainMenuItem: string) => dispatch(AppStore.mainMenuSelectItem(selectedMainMenuItem)),
     };
 }
 
