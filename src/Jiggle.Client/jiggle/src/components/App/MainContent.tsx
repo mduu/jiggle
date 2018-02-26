@@ -2,6 +2,10 @@ import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import * as AppStore from '../../redux/AppStore';
 import Import from '../Import/Import';
+import Albums from '../Albums/Albums';
+import Faces from '../Faces/Faces';
+import Locations from '../Locations/Locations';
+import Tags from '../Tags/Tags';
 
 export interface MainContentProps {
     selectedMainMenuItem: string;
@@ -9,8 +13,11 @@ export interface MainContentProps {
   
 const MainContent = (props: MainContentProps) => {
     switch (props.selectedMainMenuItem) {
-      case 'import':
-          return <Import />;
+      case 'import': return <Import />;
+      case 'albums': return <Albums />;
+      case 'faces': return <Faces />;
+      case 'locations': return <Locations />;
+      case 'tags': return <Tags />;
       default:
           return (
             <section>
