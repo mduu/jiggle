@@ -5,17 +5,19 @@ import App from './components/App/App';
 import { appStore } from './redux/AppStore';
 import registerServiceWorker from './registerServiceWorker';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import Reboot from 'material-ui/Reboot';
 
 import './index.css';
 
 const theme = createMuiTheme({
   palette: {
-    type: 'dark',
+    type: 'light',
   },
 });
 
 ReactDOM.render(
   <MuiThemeProvider theme={theme}>
+    <Reboot />
     <Provider store={appStore}>
       <App />
     </Provider>

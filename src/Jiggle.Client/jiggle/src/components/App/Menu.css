@@ -1,8 +1,8 @@
 .App aside.sidebar-menu {
     flex: 0 1 150px;
     padding: 5px;
-    background-color: rgb(31, 31, 31);
-    border-right: #333 2px solid;
+    background-color: rgb(226, 226, 226);
+    border-right: #ddd 2px solid;
     height: 100vh;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .main-menu .main-menu-item {
-    border: #333 1px solid;
+    border: #ddd 1px solid;
     padding: 10px;
     flex: 1 1 0;
     margin: 3px 5px;
@@ -21,10 +21,10 @@
 }
 
 .main-menu .main-menu-item:hover {
-    background-color: rgb(48, 48, 48);
+    background-color: rgb(255, 255, 255);
 }
 
 .main-menu .main-menu-item.selected {
-    background-color: rgb(71, 71, 71);
+    background-color: rgb(199, 199, 199);
     border-color: #555;
 }
