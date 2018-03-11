@@ -6,7 +6,7 @@ import Grid from 'material-ui/Grid';
 
 import './Import.css';
 import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
-import TagSelector from '../TagSelector/TagSelector';
+import TagSelector from '../../components/TagSelector/TagSelector';
 
 class Import extends React.Component {
   state = {

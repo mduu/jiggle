@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import * as AppStore from '../../redux/AppStore';
-import Import from '../Import/Import';
-import Albums from '../Albums/Albums';
-import Faces from '../Faces/Faces';
-import Locations from '../Locations/Locations';
-import Tags from '../Tags/Tags';
+import Import from '../../pages/Import/Import';
+import Albums from '../../pages/Albums/Albums';
+import Faces from '../../pages/Faces/Faces';
+import Locations from '../../pages/Locations/Locations';
+import Tags from '../../pages/Tags/Tags';
 
 export type TMainContentProps = {
     selectedMainMenuItem: string;
