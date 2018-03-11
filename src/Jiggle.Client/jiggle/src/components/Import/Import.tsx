@@ -80,6 +80,10 @@ class Import extends React.Component {
               />
             </Grid>
 
+            <Grid item={true} xs={6}>
+
+            </Grid>
+
             <Grid item={true} xs={12}>
               <Button variant="raised" color="primary">
                 Start Import
