@@ -22,11 +22,6 @@ class TagSelector extends React.Component {
 
   // tslint:disable-next-line:no-any
   handleDelete = (data: any) => () => {
-    if (data.label === 'React') {
-      alert('Why would you want to delete React?! :)'); // eslint-disable-line no-alert
-      return;
-    }
-
     const chipData = [...this.state.chipData];
     const chipToDelete = chipData.indexOf(data);
     chipData.splice(chipToDelete, 1);

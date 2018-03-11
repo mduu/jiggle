@@ -6,6 +6,7 @@ import Grid from 'material-ui/Grid';
 
 import './Import.css';
 import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
+import TagSelector from '../TagSelector/TagSelector';
 
 class Import extends React.Component {
   state = {
@@ -33,20 +34,20 @@ class Import extends React.Component {
 
             <Grid item={true} xs={3}>
               <FormControl>
-              <InputLabel htmlFor="age-helper">Existing album</InputLabel>
-              <Select
-                value={this.state.age}
-                onChange={this.handleChange}
-                input={<Input name="existingAlbum" id="existingAlbum-helper" />}
-              >
-                <MenuItem value="">
-                  <em>New album</em>
-                </MenuItem>
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-              <FormHelperText>If album doesn't exists create a new one.</FormHelperText>
+                <InputLabel htmlFor="age-helper">Existing album</InputLabel>
+                <Select
+                  value={this.state.age}
+                  onChange={this.handleChange}
+                  input={<Input name="existingAlbum" id="existingAlbum-helper" />}
+                >
+                  <MenuItem value="">
+                    <em>New album</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+                <FormHelperText>If album doesn't exists create a new one.</FormHelperText>
               </FormControl>
             </Grid>
 
@@ -70,7 +71,7 @@ class Import extends React.Component {
               />
             </Grid>
 
-            <Grid item={true} xs={6}>
+            <Grid item={true} xs={12}>
               <TextField 
                 id="takenBy"
                 label="Taken by"
@@ -80,9 +81,13 @@ class Import extends React.Component {
               />
             </Grid>
 
-            <Grid item={true} xs={6}>
-
-            </Grid>
+            <Grid item={true} xs={12}>
+            <FormControl>
+              <InputLabel>Tags</InputLabel>
+              <TagSelector />
+              <FormHelperText>Assign Tags (Categories) to the assets if you like.</FormHelperText>
+            </FormControl>
+           </Grid>
 
             <Grid item={true} xs={12}>
               <Button variant="raised" color="primary">
