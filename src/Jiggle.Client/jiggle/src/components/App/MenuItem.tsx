@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-export interface MenuItemProps {
+export type TMenuItemProps = {
     text: string;
     faIconName: string;
     isSelected: boolean;
     onSelect?: () => void;
-}
+};
 
-const MenuItem = (props: MenuItemProps) => {
+const MenuItem = (props: TMenuItemProps) => {
     let cssClassIcon = 'fas fa-fw ' + props.faIconName;
     let cssClassDiv = 'main-menu-item';
     if (props.isSelected) {

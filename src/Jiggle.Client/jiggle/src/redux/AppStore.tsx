@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 
 // --- State ---
-export interface AppStoreState {
+export interface IAppStoreState {
     selectedMainMenuItem: string;
 }
 
@@ -10,16 +10,16 @@ export const MAINMENU_SELECTITEM = 'MAINMENU_SELECTITEM';
 export type MAINMENU_SELECTITEM = typeof MAINMENU_SELECTITEM;
 
 // tslint:disable-next-line:class-name
-export interface MainMenu_SelectItem {
+export interface IMainMenu_SelectItem {
     type: MAINMENU_SELECTITEM;
     selectedMainMenuItem: string;
 }
 
 // MainMenu Actions Type
-export type MainMenuAction = MainMenu_SelectItem /*| DecrementEnthusiasm */;
+export type MainMenuAction = IMainMenu_SelectItem /*| DecrementEnthusiasm */;
 
 // --- Action Factories ---
-export function mainMenuSelectItem(selectedMainMenuItem: string): MainMenu_SelectItem {
+export function mainMenuSelectItem(selectedMainMenuItem: string): IMainMenu_SelectItem {
     return {
         type: MAINMENU_SELECTITEM,
         selectedMainMenuItem: selectedMainMenuItem
@@ -27,7 +27,7 @@ export function mainMenuSelectItem(selectedMainMenuItem: string): MainMenu_Selec
 }
 
 // --- Reducers ---
-export function mainMenu(state: AppStoreState, action: MainMenuAction): AppStoreState {
+export function mainMenu(state: IAppStoreState, action: MainMenuAction): IAppStoreState {
     switch (action.type) {
         case MAINMENU_SELECTITEM:
             return { ...state, selectedMainMenuItem: action.selectedMainMenuItem };
@@ -37,6 +37,6 @@ export function mainMenu(state: AppStoreState, action: MainMenuAction): AppStore
 }
 
 // --- Store ---
-export const appStore = createStore<AppStoreState>(mainMenu, {
+export const appStore = createStore<IAppStoreState>(mainMenu, {
     selectedMainMenuItem: 'home'
 });

@@ -7,11 +7,11 @@ import Faces from '../Faces/Faces';
 import Locations from '../Locations/Locations';
 import Tags from '../Tags/Tags';
 
-export interface MainContentProps {
+export type TMainContentProps = {
     selectedMainMenuItem: string;
-}
+};
   
-const MainContent = (props: MainContentProps) => {
+const MainContent = (props: TMainContentProps) => {
     switch (props.selectedMainMenuItem) {
       case 'import': return <Import />;
       case 'albums': return <Albums />;
@@ -30,7 +30,7 @@ const MainContent = (props: MainContentProps) => {
     }
   };
 
-export function mapStateToProps({ selectedMainMenuItem }: AppStore.AppStoreState) {
+export function mapStateToProps({ selectedMainMenuItem }: AppStore.IAppStoreState) {
     return {
         selectedMainMenuItem
     };

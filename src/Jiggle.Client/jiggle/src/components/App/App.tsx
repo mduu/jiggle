@@ -6,11 +6,11 @@ import MainContent from './MainContent';
 
 import './App.css';
 
-export interface AppProps {
+export type TAppProps = {
   selectedMainMenuItem: string;
-}
+};
 
-const App = (props: AppProps) => (
+const App = (props: TAppProps) => (
 
   <div className="App">
     <Menu />
@@ -21,7 +21,7 @@ const App = (props: AppProps) => (
   </div>
 );
 
-export function mapStateToProps({ selectedMainMenuItem }: AppStore.AppStoreState) {
+export function mapStateToProps({ selectedMainMenuItem }: AppStore.IAppStoreState) {
   return {
       selectedMainMenuItem
   };

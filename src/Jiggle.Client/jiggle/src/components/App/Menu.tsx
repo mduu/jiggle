@@ -6,12 +6,12 @@ import './Menu.css';
 
 const logo = require('./logo.svg');
 
-export interface MenuProps {
+export type TMenuProps = {
     selectedMainMenuItem: string;
     onSelectMainMenuItem: (mainMenuItem: string) => void;
-}
+};
 
-const Menu = (props: MenuProps) => (
+const Menu = (props: TMenuProps) => (
     
     <aside className="sidebar-menu">
         <img src={logo} className="App-logo" alt="logo" />
@@ -57,7 +57,7 @@ const Menu = (props: MenuProps) => (
     </aside>
 );
 
-export function mapStateToProps({ selectedMainMenuItem }: AppStore.AppStoreState) {
+export function mapStateToProps({ selectedMainMenuItem }: AppStore.IAppStoreState) {
     return {
         selectedMainMenuItem
     };
