@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Chip from 'material-ui/Chip';
-import Paper from 'material-ui/Paper';
 
 type TStyle = {
   tagselectorRoot: string;
@@ -30,7 +29,7 @@ class TagSelector extends React.Component {
 
   render() {
     return (
-      <Paper className={styles.tagselectorRoot}>
+      <div className={styles.tagselectorRoot}>
         {this.state.chipData.map(data => {
           return (
             <Chip
@@ -41,7 +40,7 @@ class TagSelector extends React.Component {
             />
           );
         })}
-      </Paper>
+      </div>
     );
   }
 }

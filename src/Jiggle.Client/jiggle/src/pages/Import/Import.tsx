@@ -82,12 +82,9 @@ class Import extends React.Component {
             </Grid>
 
             <Grid item={true} xs={12}>
-            <FormControl>
               <InputLabel>Tags</InputLabel>
               <TagSelector />
-              <FormHelperText>Assign Tags (Categories) to the assets if you like.</FormHelperText>
-            </FormControl>
-           </Grid>
+            </Grid>
 
             <Grid item={true} xs={12}>
               <Button variant="raised" color="primary">
