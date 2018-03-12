@@ -1,17 +1,10 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import MenuItem  from './MenuItem';
-import * as AppStore from '../../redux/AppStore';
+import { MenuItem } from './MenuItem';
 import './Menu.css';
 
 const logo = require('./logo.svg');
 
-export type TMenuProps = {
-    selectedMainMenuItem: string;
-    onSelectMainMenuItem: (mainMenuItem: string) => void;
-};
-
-const Menu = (props: TMenuProps) => (
+export const Menu = () => (
     
     <aside className="sidebar-menu">
         <img src={logo} className="App-logo" alt="logo" />
@@ -20,54 +13,33 @@ const Menu = (props: TMenuProps) => (
             <MenuItem 
                 text="Home" 
                 faIconName="fa-home" 
-                isSelected={props.selectedMainMenuItem === 'home'} 
-                onSelect={() => props.onSelectMainMenuItem('home')}
+                routeTo="/"
             />
             <MenuItem 
                 text="Import" 
                 faIconName="fa-upload" 
-                isSelected={props.selectedMainMenuItem === 'import'} 
-                onSelect={() => props.onSelectMainMenuItem('import')}
+                routeTo="/import"
             />
             <MenuItem 
                 text="Albums" 
                 faIconName="fa-images" 
-                isSelected={props.selectedMainMenuItem === 'albums'} 
-                onSelect={() => props.onSelectMainMenuItem('albums')}
+                routeTo="/albums"
             />
             <MenuItem 
                 text="Faces" 
                 faIconName="fa-user" 
-                isSelected={props.selectedMainMenuItem === 'faces'} 
-                onSelect={() => props.onSelectMainMenuItem('faces')}
+                routeTo="/faces"
             />
             <MenuItem 
                 text="Locations" 
                 faIconName="fa-map-marker" 
-                isSelected={props.selectedMainMenuItem === 'locations'} 
-                onSelect={() => props.onSelectMainMenuItem('locations')}
+                routeTo="/locations"
             />
             <MenuItem 
                 text="Tags" 
                 faIconName="fa-tags" 
-                isSelected={props.selectedMainMenuItem === 'tags'} 
-                onSelect={() => props.onSelectMainMenuItem('tags')}
+                routeTo="/tags"
             />
        </nav>
     </aside>
 );
-
-export function mapStateToProps({ selectedMainMenuItem }: AppStore.IAppStoreState) {
-    return {
-        selectedMainMenuItem
-    };
-}
-
-export function mapDispatchToProps(dispatch: Dispatch<AppStore.MainMenuAction>) {
-    return {
-        onSelectMainMenuItem: 
-            (selectedMainMenuItem: string) => dispatch(AppStore.mainMenuSelectItem(selectedMainMenuItem)),
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);

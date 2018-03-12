@@ -1,22 +1,20 @@
 import * as React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export type TMenuItemProps = {
     text: string;
     faIconName: string;
-    isSelected: boolean;
-    onSelect?: () => void;
+    routeTo: string;
 };
 
-const MenuItem = (props: TMenuItemProps) => {
+export const MenuItem = (props: TMenuItemProps) => {
     let cssClassIcon = 'fas fa-fw ' + props.faIconName;
-    let cssClassDiv = 'main-menu-item';
-    if (props.isSelected) {
-        cssClassDiv += ' selected';
-    }
 
     return (
-        <div className={cssClassDiv} onClick={props.onSelect}><i className={cssClassIcon} />&nbsp;{props.text}</div>
+        <NavLink exact={true} to={props.routeTo} activeClassName="selected">
+            <div className="main-menu-item">
+                <i className={cssClassIcon} />&nbsp;{props.text}
+            </div>
+        </NavLink>
     );
 };
-
-export default MenuItem;

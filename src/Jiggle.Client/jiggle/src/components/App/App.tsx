@@ -1,17 +1,14 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
-import * as AppStore from '../../redux/AppStore';
-import Menu from './Menu';
-import MainContent from './MainContent';
+import { MainContent } from './MainContent';
 
 import './App.css';
+import { Menu } from './Menu';
 
 export type TAppProps = {
-  selectedMainMenuItem: string;
+  selectedMainMenuItem?: string;
 };
 
-const App = (props: TAppProps) => (
-
+export const App = (props: TAppProps) => (
   <div className="App">
     <Menu />
 
@@ -20,15 +17,3 @@ const App = (props: TAppProps) => (
     </section>
   </div>
 );
-
-export function mapStateToProps({ selectedMainMenuItem }: AppStore.IAppStoreState) {
-  return {
-      selectedMainMenuItem
-  };
-}
-
-export function mapDispatchToProps(dispatch: Dispatch<AppStore.MainMenuAction>) {
-  return {  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
