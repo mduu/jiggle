@@ -30,7 +30,7 @@ class Import extends React.Component {
 
         <form autoComplete="off">
 
-          <Grid container={true} xs={12}>
+          <Grid container={true}>
 
             <Grid item={true} xs={3}>
               <FormControl>
