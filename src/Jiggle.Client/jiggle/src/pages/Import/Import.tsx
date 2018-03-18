@@ -7,16 +7,35 @@ import Grid from 'material-ui/Grid';
 import './Import.css';
 import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
 import TagSelector from '../../components/TagSelector/TagSelector';
+import Dropzone, { ImageFile } from 'react-dropzone';
 
-class Import extends React.Component {
-  state = {
-    age: '',
-    name: 'hai',
+export interface IProps {
+}
+
+interface IState {
+  filesPreview: any[];
+  filesToBeSent: ImageFile[];
+  printcount: number;
+}
+
+class Import extends React.Component<IProps, IState> {
+  state: IState = {
+    filesPreview: [],
+    filesToBeSent: [],
+    printcount: 10
   };
 
   // tslint:disable-next-line:no-any
   handleChange = (event: any) => {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onDrop(acceptedFiles: ImageFile[], rejectedFiles: ImageFile[]) {
+    // tslint:disable-next-line:no-console
+    console.log('Accepted files: ', acceptedFiles[0].name);
+    let filesToBeSent = this.state.filesToBeSent;
+    filesToBeSent.push(...acceptedFiles);
+    this.setState({ ...this.state, filesToBeSent }); 
   }
 
   render() {
@@ -36,12 +55,11 @@ class Import extends React.Component {
               <FormControl>
                 <InputLabel htmlFor="age-helper">Existing album</InputLabel>
                 <Select
-                  value={this.state.age}
+                  value=""
                   onChange={this.handleChange}
                   input={<Input name="existingAlbum" id="existingAlbum-helper" />}
                 >
-                  <MenuItem value="">
-                    <em>New album</em>
+                  <MenuItem value=""><em>New album</em>
                   </MenuItem>
                   <MenuItem value={10}>Ten</MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
@@ -83,7 +101,18 @@ class Import extends React.Component {
 
             <Grid item={true} xs={12}>
               <InputLabel>Tags</InputLabel>
+            </Grid>
+            <Grid item={true} xs={12}>
               <TagSelector />
+            </Grid>
+
+            <Grid item={true} xs={12}>
+              <InputLabel>Files/Images</InputLabel>
+            </Grid>
+            <Grid item={true} xs={12}>
+              <Dropzone onDrop={(accepted, rejected) => this.onDrop(accepted, rejected)}>
+                  <div>Try dropping some files here, or click to select files to upload.</div>
+              </Dropzone>
             </Grid>
 
             <Grid item={true} xs={12}>
