@@ -1,28 +1,26 @@
 import * as React from 'react';
-
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid';
-
-import './Import.css';
-import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
+import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText, Icon } from 'material-ui';
 import TagSelector from '../../components/TagSelector/TagSelector';
 import Dropzone, { ImageFile } from 'react-dropzone';
+
+import './Import.css';
 
 export interface IProps {
 }
 
 interface IState {
+  // tslint:disable-next-line:no-any
   filesPreview: any[];
   filesToBeSent: ImageFile[];
-  printcount: number;
 }
 
 class Import extends React.Component<IProps, IState> {
   state: IState = {
     filesPreview: [],
-    filesToBeSent: [],
-    printcount: 10
+    filesToBeSent: []
   };
 
   // tslint:disable-next-line:no-any
@@ -35,7 +33,19 @@ class Import extends React.Component<IProps, IState> {
     console.log('Accepted files: ', acceptedFiles[0].name);
     let filesToBeSent = this.state.filesToBeSent;
     filesToBeSent.push(...acceptedFiles);
-    this.setState({ ...this.state, filesToBeSent }); 
+
+    let filesPreview = this.state.filesToBeSent.map((f, i) => {
+      return (
+        <div key={i}>
+          {f.name}
+          <a href="#">
+            <Icon>clear</Icon>
+          </a>
+        </div>
+      );
+    });
+
+    this.setState({ ...this.state, filesToBeSent, filesPreview }); 
   }
 
   render() {
@@ -113,6 +123,10 @@ class Import extends React.Component<IProps, IState> {
               <Dropzone onDrop={(accepted, rejected) => this.onDrop(accepted, rejected)}>
                   <div>Try dropping some files here, or click to select files to upload.</div>
               </Dropzone>
+              <div>
+                Files to upload/import are:
+                {this.state.filesPreview}
+              </div>
             </Grid>
 
             <Grid item={true} xs={12}>
