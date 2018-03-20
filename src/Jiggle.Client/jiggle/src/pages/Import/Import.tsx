@@ -6,7 +6,7 @@ import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText, Icon 
 import TagSelector from '../../components/TagSelector/TagSelector';
 import Dropzone, { ImageFile } from 'react-dropzone';
 
-import './Import.css';
+import './Import.less';
 
 export interface IProps {
 }
