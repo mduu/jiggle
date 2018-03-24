@@ -1,5 +1,4 @@
-import { TTags } from './Tags';
-import { TId } from './Id';
+import { TTags, TId } from '.';
 
 export interface IAssetImportOptions {
     // tslint:disable-next-line:no-any

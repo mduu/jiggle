@@ -7,16 +7,15 @@ import TagSelector from '../../components/TagSelector/TagSelector';
 
 import './Import.less';
 
-export interface IProps {
+export interface IOwnProps {
 }
 
-interface IState {
-}
+type TProps = IOwnProps;
 
-class Import extends React.Component<IProps, IState> {
+export class Import extends React.Component<TProps> {
   // tslint:disable-next-line:no-any
   handleChange = (event: any) => {
-    this.setState({ [event.target.name]: event.target.value });
+    // this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
@@ -92,7 +91,7 @@ class Import extends React.Component<IProps, IState> {
             </Grid>
 
             <Grid item={true} xs={12}>
-              <input type="file" multiple={true} />
+              <input type="file" multiple={true}   />
             </Grid>
 
             <Grid item={true} xs={12}>
@@ -108,5 +107,3 @@ class Import extends React.Component<IProps, IState> {
     );
   }
 }
-
-export default Import;
