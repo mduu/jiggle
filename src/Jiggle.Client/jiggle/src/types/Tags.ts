@@ -1,3 +1,2 @@
-export type TTag = string;
-
-export type TTags = TTag[];
+export type Tag = string;
+export type Tags = Tag[];

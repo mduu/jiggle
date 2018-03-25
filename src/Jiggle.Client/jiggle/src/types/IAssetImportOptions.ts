@@ -1,14 +1,14 @@
-import { TTags, TId } from '.';
+import { Tags, Id } from '.';
 
 export interface IAssetImportOptions {
     // tslint:disable-next-line:no-any
     originalFileContent: any;
     originalFilename: string;
-    tags: TTags;
-    existingAlbumId: TId;
+    tags: Tags;
+    existingAlbumId: Id;
     newAlbumName: string;
     newAlbumDescription: string;
-    parentAlbumId: TId;
+    parentAlbumId: Id;
     takeTime: Date;
     takenBy: string;
 }

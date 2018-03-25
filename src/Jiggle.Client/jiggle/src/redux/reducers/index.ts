@@ -1,7 +1,5 @@
-import { MasterdataState, masterdata } from './masterdata';
 import { combineReducers } from 'redux';
-
-export { MasterdataState } from './masterdata';
+import { masterdata, MasterdataState } from '../masterdata/';
 
 export type TAppState = {
     masterdata: MasterdataState;

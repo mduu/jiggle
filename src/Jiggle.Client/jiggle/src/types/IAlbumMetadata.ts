@@ -1,4 +1,4 @@
-import { TTags } from '.';
+import { Tags } from '.';
 
 export interface IAlbumMetadata {
     id: string;
@@ -6,5 +6,5 @@ export interface IAlbumMetadata {
     description: string;
     createDate: Date;
     updateDate: Date;
-    tags: TTags;
+    tags: Tags;
 }
