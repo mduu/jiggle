@@ -1,6 +1,6 @@
-import { IAlbumMetadata, Tags, IError } from '../../../types';
-import { MasterdataAction } from '../actions';
-import * as constants from '../constants';
+import { IAlbumMetadata, Tags, IError } from '../../../core';
+import { MasterdataAction } from '../actions/';
+import * as constants from '../actions/constants';
 
 export type MasterdataState = {
     isFetching: boolean;

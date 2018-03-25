@@ -1,5 +1,6 @@
-import { Tags, IAlbumMetadata, IError } from '../../types';
+import { Tags, IAlbumMetadata, IError } from '../../../core';
 import * as constants from './constants';
+import { TDispatchableReturn } from '../../types';
 
 export type MasterdataFetch = {
     type: constants.MASTERDATA_FETCH,
@@ -23,6 +24,32 @@ export type MasterdataError = {
 export type MasterdataAction = MasterdataFetch | MasterdataRequest | MasterdataReceive | MasterdataError;
 
 // TODO export function masterdataFetch(...)
+export const masterdataFetch = (): TDispatchableReturn<MasterdataAction> => 
+    (dispatch, getState) => {
+
+        const state = getState();
+
+        if (state.masterdata.isFetching) {
+            return Promise.resolve();
+        }
+
+        dispatch(masterdataRequest());
+
+        const url = ''; // TODO
+        return fetch(url)
+            .then(
+                response => response.json(),
+                error => {
+                    console.log('An error occurred.', error);
+                    dispatch(masterdataError([{
+                        message: error.message
+                    } as IError]));
+                }
+            )
+            .then(json =>
+                dispatch(masterdataReceive(json.tags, json.albums))
+            );
+    };
 
 export function masterdataRequest(): MasterdataRequest {
     return {
