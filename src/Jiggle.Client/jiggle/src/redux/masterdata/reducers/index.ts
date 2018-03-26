@@ -5,13 +5,20 @@ import * as constants from '../actions/constants';
 export type MasterdataState = {
     isFetching: boolean;
     isLoaded: boolean;
-    errors: IError[];
+    errors?: IError[];
     tags: Tags;
     albums: IAlbumMetadata[];
-    receivedAt: number;
+    receivedAt?: number;
 };
 
-export function masterdata(state: MasterdataState, action: MasterdataAction): MasterdataState {
+const initalState = {
+    isFetching: false,
+    isLoaded: false,
+    tags: [],
+    albums: []
+};
+
+export function masterdata(state: MasterdataState = initalState, action: MasterdataAction): MasterdataState {
 
     switch (action.type) {
         case constants.MASTERDATA_REQUEST:
