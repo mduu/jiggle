@@ -1,10 +1,5 @@
-import { 
-    IRemote, 
-    IResponseObject, 
-    IMasterdataPayload, 
-    IUrlManager, 
-    IFetcher
-} from '.';
+import { IRemote, IUrlManager, IResponseObject, IMasterdataPayload } from '..';
+import { IFetcher } from '../fetching';
 
 export abstract class RemoteBase implements IRemote {
 

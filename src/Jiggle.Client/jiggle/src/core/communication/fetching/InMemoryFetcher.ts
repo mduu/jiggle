@@ -1,22 +1,5 @@
-import { 
-    RemoteBase, 
-    IUrlManager, 
-    IFetcher, 
-    IResponseObject
-} from '.';
-
-export class InMemoryServer extends RemoteBase {
-    createUrlManager(): IUrlManager {
-        return new InMemoryUrlManager();
-    }
-    createFetcher(): IFetcher {
-        return new InMemoryFetcher();
-    }
-}
-
-export class InMemoryUrlManager implements IUrlManager {
-    
-}
+import { IResponseObject } from '..';
+import { IFetcher } from '.';
 
 export class InMemoryFetcher implements IFetcher {
     getJson<TPayload>(url: string): Promise<IResponseObject<TPayload>> {
