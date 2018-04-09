@@ -1,16 +1,7 @@
-import { RemoteBase } from '.';
-import { IUrlManager } from '..';
-import { IFetcher, InMemoryFetcher } from '../fetching';
+import { IRemote, IResponseObject, IMasterdataPayload } from '..';
 
-export class InMemoryServer extends RemoteBase {
-    createUrlManager(): IUrlManager {
-        return new InMemoryUrlManager();
+export class InMemoryServer implements IRemote {
+    getMasterdata(): Promise<IResponseObject<IMasterdataPayload>> {
+        throw new Error('Method not implemented.');
     }
-    createFetcher(): IFetcher {
-        return new InMemoryFetcher();
-    }
-}
-
-export class InMemoryUrlManager implements IUrlManager {
-    
 }

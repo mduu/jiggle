@@ -1,3 +1,2 @@
-export { RemoteBase } from './RemoteBase';
-export { InMemoryServer } from './InMemoryServer';
-export { JiggleServer } from './JiggleServer';
+export { InMemoryServerFactory } from './InMemoryServerFactory';
+export { RemoteServerFactory } from './RemoteServerFactory';
