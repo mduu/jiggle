@@ -4,5 +4,7 @@ import { RemoteServer } from './RemoteServer';
 import { UrlManager } from './UrlManager';
 
 export function RemoteServerFactory(): IRemote {
-    return new RemoteServer(new RestFetcher(), new UrlManager());
+    return new RemoteServer(
+        new RestFetcher(), 
+        new UrlManager());
 }

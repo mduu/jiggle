@@ -3,8 +3,8 @@ import { Tags } from '.';
 export interface IAlbumMetadata {
     id: string;
     caption: string;
-    description: string;
+    description?: string;
     createDate: Date;
-    updateDate: Date;
-    tags: Tags;
+    updateDate?: Date;
+    tags?: Tags;
 }
