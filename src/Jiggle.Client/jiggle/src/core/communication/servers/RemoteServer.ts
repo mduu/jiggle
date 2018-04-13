@@ -16,6 +16,8 @@ export class RemoteServer implements IRemote {
     }
 
     getMasterdata(): Promise<IResponseObject<IMasterdataPayload>> {
-        throw new Error('Method not implemented.');
+        const url = this.urlManager.getMasterdataUrl();
+
+        return this.fetcher.getJson(url);
     }
 }
