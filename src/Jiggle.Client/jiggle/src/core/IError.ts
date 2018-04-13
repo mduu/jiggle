@@ -1,5 +1,6 @@
 export interface IError {
     message: string;
-    serverCode: number;
+    serverCode?: number;
+    code?: string;
     fieldName?: string;
 }

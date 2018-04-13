@@ -1,6 +1,7 @@
 import { Tags, IAlbumMetadata, IError } from '../../../core';
 import * as constants from './constants';
 import { TDispatchableReturn } from '../../types';
+import { ServerFactory } from '../../../core/communication/servers';
 
 export type MasterdataFetch = {
     type: constants.MASTERDATA_FETCH,
@@ -25,7 +26,7 @@ export type MasterdataAction = MasterdataFetch | MasterdataRequest | MasterdataR
 
 // TODO export function masterdataFetch(...)
 export const masterdataFetch = (): TDispatchableReturn<MasterdataAction> => 
-    (dispatch, getState) => {
+    async (dispatch, getState) => {
 
         const state = getState();
 
@@ -35,20 +36,20 @@ export const masterdataFetch = (): TDispatchableReturn<MasterdataAction> =>
 
         dispatch(masterdataRequest());
 
-        const url = ''; // TODO
-        return fetch(url)
-            .then(
-                response => response.json(),
-                error => {
-                    console.log('An error occurred.', error);
-                    dispatch(masterdataError([{
-                        message: error.message
-                    } as IError]));
-                }
-            )
-            .then(json =>
-                dispatch(masterdataReceive(json.tags, json.albums))
-            );
+        const server = new ServerFactory().createServer();
+
+        const response = await server.getMasterdata();
+        if (response.errors) {
+            dispatch(masterdataError(response.errors.map((e) => ({
+                code: e.errorCode,
+                fieldName: e.fieldName,
+                message: e.message
+            }) as IError)));
+        } else {
+            dispatch(masterdataReceive(
+                response.payload.tags, 
+                response.payload.albums ? response.payload.albums : []));
+        }
     };
 
 export function masterdataRequest(): MasterdataRequest {
