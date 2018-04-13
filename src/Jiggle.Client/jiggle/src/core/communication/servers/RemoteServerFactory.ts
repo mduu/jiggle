@@ -2,7 +2,7 @@ import { IRemote } from '..';
 import { RestFetcher } from '../fetching';
 import { RemoteServer } from './RemoteServer';
 import { UrlManager } from './UrlManager';
-import { IRemoteServerConfiguration } from '../configuration';
+import { IRemoteServerConfiguration } from '../../configuration';
 
 export function RemoteServerFactory(): IRemote {
 

@@ -1,5 +1,5 @@
 import { IUrlManager } from './IUrlManager';
-import { IRemoteServerConfiguration } from '../configuration';
+import { IRemoteServerConfiguration } from '../../configuration';
 
 export class UrlManager implements IUrlManager {
 
