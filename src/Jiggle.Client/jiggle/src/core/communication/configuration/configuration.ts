@@ -1,8 +1,3 @@
-export interface IConfiguration extends 
-    IGeneralConfiguration,
-    IRemoteServerConfiguration {
-}
-
 export interface IGeneralConfiguration {
     instanceName: string;
     instanceTitle?: string;
@@ -11,4 +6,9 @@ export interface IGeneralConfiguration {
 
 export interface IRemoteServerConfiguration {
     remoteUrl: string;
+}
+
+export interface IConfiguration extends 
+    IGeneralConfiguration,
+    IRemoteServerConfiguration {
 }
