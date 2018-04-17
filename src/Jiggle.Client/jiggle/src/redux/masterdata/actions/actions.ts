@@ -24,7 +24,6 @@ export type MasterdataError = {
 
 export type MasterdataAction = MasterdataFetch | MasterdataRequest | MasterdataReceive | MasterdataError;
 
-// TODO export function masterdataFetch(...)
 export const masterdataFetch = (): TDispatchableReturn<MasterdataAction> => 
     async (dispatch, getState) => {
 
