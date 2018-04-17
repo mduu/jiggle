@@ -1,15 +1,18 @@
 import * as React from 'react';
 import * as masterdataActions from '../../redux/masterdata/actions';
 import { connect } from 'react-redux';
+import { Route, RouteComponentProps } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { CircularProgress } from 'material-ui';
 import { MainContent } from './MainContent';
 
 import './App.css';
 import { Menu } from './Menu';
+import { TAppState } from '../../redux';
 
 export type TOwnProps = {
   selectedMainMenuItem?: string;
-};
+} & RouteComponentProps<{}>;
 
 type TStateProps = {
   isFetching: boolean;
@@ -39,19 +42,21 @@ export class AppComponent extends React.Component<TProps> {
       <div className="App">
         <Menu />
 
-        <section className="main-content">
-          {isFetching && <CircularProgress />}
-          {isLoaded && <MainContent />}
-        </section>
+        <Route path="*" >
+          <section className="main-content">
+            {isFetching && <CircularProgress />}
+            {isLoaded && <MainContent />}
+          </section>
+        </Route>
       </div>
     );
   }
 }
 
-export function mapStateToProps(state: TStateProps) {
+export function mapStateToProps(state: TAppState) {
   return {
-    isFetching: state.isFetching,
-    isLoaded: state.isLoaded
+    isFetching: state.masterdata.isFetching,
+    isLoaded: state.masterdata.isLoaded
   };
 }
 
@@ -59,4 +64,5 @@ const dispatchProps: TDispatchProps = {
   onMasterdataFetch: masterdataActions.masterdataFetch
 };
 
-export const App = connect<TStateProps, TDispatchProps, TOwnProps>(mapStateToProps, dispatchProps)(AppComponent);
+// tslint:disable-next-line:max-line-length
+export const App = withRouter<TOwnProps>(connect<TStateProps, TDispatchProps, TOwnProps>(mapStateToProps, dispatchProps)(AppComponent));

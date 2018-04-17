@@ -24,7 +24,8 @@ export function masterdata(state: MasterdataState = initalState, action: Masterd
         case constants.MASTERDATA_REQUEST:
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                isLoaded: false,
             };
         case constants.MASTERDATA_RECEIVE:
             return {
@@ -32,11 +33,14 @@ export function masterdata(state: MasterdataState = initalState, action: Masterd
                 tags: action.tags,
                 albums: action.albums,
                 isFetching: false,
+                isLoaded: true,
                 receivedAt: Date.now()
             };
         case constants.MASTERDATA_ERROR:
             return {
                 ...state,
+                isFetching: false,
+                isLoaded: false,
                 errors: action.errors
             };
         default:
