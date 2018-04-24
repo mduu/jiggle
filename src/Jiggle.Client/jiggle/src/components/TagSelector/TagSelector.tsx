@@ -1,5 +1,7 @@
 import * as React from 'react';
-import Chip from 'material-ui/Chip';
+import { Input, TextField, Chip, MenuItem } from 'material-ui';
+import Select from 'react-select';
+import { Tags } from '../../core';
 
 type TStyle = {
   tagselectorRoot: string;
@@ -8,41 +10,92 @@ type TStyle = {
 
 const styles: TStyle = require('./TagSelector.less');
 
-class TagSelector extends React.Component {
-  state = {
-    chipData: [
-      { key: 0, label: 'Portrait' },
-      { key: 1, label: 'Nature' },
-      { key: 2, label: 'Diving' },
-      { key: 3, label: 'Fish' },
-      { key: 4, label: 'Animals' },
-    ],
-  };
+const ITEM_HEIGHT = 48;
 
-  // tslint:disable-next-line:no-any
-  handleDelete = (data: any) => () => {
-    const chipData = [...this.state.chipData];
-    const chipToDelete = chipData.indexOf(data);
-    chipData.splice(chipToDelete, 1);
-    this.setState({ chipData });
+export type TProps = {
+  allTags: Tags;
+};
+
+type TState = {
+  single: string | null,
+  multi?: string | null,
+  multiLabel?: string | null,
+};
+
+export class TagSelector extends React.Component<TProps, TState> {
+  
+  constructor(props: TProps) {
+    super(props);
+    
+    this.state = {
+      single: null,
+      multi: null,
+      multiLabel: null;
+    };
   }
-
+  
+  handleChange = (name: string) => (value: string) => {
+    // this.setState({
+    //   [name]: value,
+    // });
+  }
+  
   render() {
+    // const { classes } = this.props;
+
     return (
-      <div className={styles.tagselectorRoot}>
-        {this.state.chipData.map(data => {
-          return (
-            <Chip
-              key={data.key}
-              label={data.label}
-              onDelete={this.handleDelete(data)}
-              className={styles.tagselectorChip}
-            />
-          );
-        })}
+      <div>
+        <Input
+          fullWidth
+          inputComponent={SelectWrapped}
+          value={this.state.single}
+          onChange={this.handleChange('single')}
+          placeholder="Search a country (start with a)"
+          id="react-select-single"
+          inputProps={{
+            name: 'react-select-single',
+            // instanceId: 'react-select-single',
+            // simpleValue: true,
+            // options: suggestions,
+          }}
+        />
+        <Input
+          fullWidth
+          inputComponent={SelectWrapped}
+          value={this.state.multi}
+          onChange={this.handleChange('multi')}
+          placeholder="Select multiple countries"
+          name="react-select-chip"
+          inputProps={{
+            multi: true,
+            instanceId: 'react-select-chip',
+            id: 'react-select-chip',
+            simpleValue: true,
+            options: suggestions,
+          }}
+        />
+        <TextField
+          fullWidth
+          value={this.state.multiLabel}
+          onChange={this.handleChange('multiLabel')}
+          placeholder="Select multiple countries"
+          name="react-select-chip-label"
+          label="With label"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          InputProps={{
+            inputComponent: SelectWrapped,
+            inputProps: {
+              classes,
+              multi: true,
+              instanceId: 'react-select-chip-label',
+              id: 'react-select-chip-label',
+              simpleValue: true,
+              options: suggestions,
+            },
+          }}
+        />
       </div>
     );
-  }
-}
-
-export default TagSelector;
+  }}

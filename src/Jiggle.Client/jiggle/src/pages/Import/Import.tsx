@@ -1,24 +1,35 @@
 import * as React from 'react';
-import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
-import Grid from 'material-ui/Grid';
-import { FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
-import TagSelector from '../../components/TagSelector/TagSelector';
+import { connect } from 'react-redux';
+import { Button, TextField, Grid, FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
+import { TagSelector } from '../../components';
+import { Tags, IAlbumMetadata } from '../../core';
 
 import './Import.less';
+import { TAppState } from '../../redux';
 
-export interface IOwnProps {
-}
+export type TOwnProps = {
+};
 
-type TProps = IOwnProps;
+type TStateProps = {
+  tags: Tags;
+  albums: IAlbumMetadata[];
+};
 
-export class Import extends React.Component<TProps> {
+type TDispatchProps = {
+
+};
+
+type TProps = TOwnProps & TStateProps & TDispatchProps;
+
+class ImportComponent extends React.Component<TProps> {
   // tslint:disable-next-line:no-any
   handleChange = (event: any) => {
     // this.setState({ [event.target.name]: event.target.value });
   }
 
   render() {
+    const { albums, tags } = this.props;
+
     return (
       <section className="Import">
         <h1>Import Assets</h1>
@@ -41,9 +52,9 @@ export class Import extends React.Component<TProps> {
                 >
                   <MenuItem value=""><em>New album</em>
                   </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  { albums && albums.map((a, i) => (
+                    <MenuItem key={i} value={a.id}>{a.caption}</MenuItem>
+                  ))}
                 </Select>
                 <FormHelperText>If album doesn't exists create a new one.</FormHelperText>
               </FormControl>
@@ -107,3 +118,16 @@ export class Import extends React.Component<TProps> {
     );
   }
 }
+
+export function mapStateToProps(state: TAppState) {
+  return {
+    tags: state.masterdata.tags,
+    albums: state.masterdata.albums
+  };
+}
+
+const dispatchProps: TDispatchProps = {
+};
+
+// tslint:disable-next-line:max-line-length
+export const Import = connect<TStateProps, TDispatchProps, TOwnProps>(mapStateToProps, dispatchProps)(ImportComponent);
