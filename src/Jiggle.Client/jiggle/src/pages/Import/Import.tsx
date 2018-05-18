@@ -94,7 +94,7 @@ class ImportComponent extends React.Component<TProps> {
               <InputLabel>Tags</InputLabel>
             </Grid>
             <Grid item={true} xs={12}>
-              <TagSelector />
+              <TagSelector allTags={tags} />
             </Grid>
 
             <Grid item={true} xs={12}>
