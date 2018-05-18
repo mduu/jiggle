@@ -1,7 +1,7 @@
-import { IAlbumMetadata, IAssetMetadata } from '.';
+import { IAlbumMetadata, IAsset } from '.';
 
 export interface IAlbum extends IAlbumMetadata {
-    assets?: IAssetMetadata[];
+    assets?: IAsset[];
     parentAlbum?: IAlbumMetadata;
     childAlbums?: IAlbumMetadata[];
 }
