@@ -20,8 +20,9 @@ export class InMemoryServer implements IRemote {
     private createMyFirstTestAlbumMetadata(): IAlbumMetadata {
         return {
             id: '12345-45678-435345',
-            caption: 'My first album',
+            name: 'My first album',
             createDate: new Date(2017, 12, 14),
+            createdBy: 'John Doe',
             description: 'A first in-memory test-album'
         };
     }
