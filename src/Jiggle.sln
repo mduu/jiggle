@@ -2,9 +2,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jiggle.Core", "Jiggle.Core\Jiggle.Core.csproj", "{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Core", "Jiggle.Core\Jiggle.Core.csproj", "{FFA4D0A2-1D04-4EFF-8A46-6865A0084905}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jiggle.Core.Tests", "Jiggle.Core.Tests\Jiggle.Core.Tests.csproj", "{AFDA20E3-FCC4-46D6-8874-2EA9E8DB12B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Core.Tests", "Jiggle.Core.Tests\Jiggle.Core.Tests.csproj", "{AFDA20E3-FCC4-46D6-8874-2EA9E8DB12B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jiggle.Server", "Jiggle.Server\Jiggle.Server.csproj", "{F6B5B252-B00B-426C-B114-D114FE814B99}"
 EndProject
