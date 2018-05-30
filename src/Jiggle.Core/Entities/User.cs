@@ -21,5 +21,7 @@ namespace Jiggle.Core.Entities
 
         public Face Face { get; set; }
         public ICollection<Asset> ImportedAssets { get; set; }
+
+        public string Fullname => $"{Firstname} {Lastname}";
     }
 }

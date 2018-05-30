@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\AppData\" />
+    <Folder Include="Core\DTO\" />
   </ItemGroup>
 
   <ItemGroup>

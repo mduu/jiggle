@@ -33,6 +33,12 @@ namespace Jiggle.Core.AssetManagement
         Task<IEnumerable<Album>> GetAlbumsByParentAlbumIdAsync(Guid? parentAlbumId);
 
         /// <summary>
+        /// Gets data for all albums.
+        /// </summary>
+        /// <returns>The all albums.</returns>
+        Task<IEnumerable<Album>> GetAllAlbums();
+
+        /// <summary>
         /// Create a new <see cref="Album"/>.
         /// </summary>
         /// <returns>The new album.</returns>

@@ -53,6 +53,15 @@ namespace Jiggle.Core.AssetManagement
         }
 
         /// <inheritdoc/>
+        public async Task<IEnumerable<Album>> GetAllAlbums()
+        {
+            return await context.Albums
+                                .Include(a => a.CreatedBy)
+                                .Include(a => a.UpdatedBy)
+                                .ToListAsync();
+        }
+
+        /// <inheritdoc/>
         public Album CreateNewAlbum(string albumName, string albumDescription, Guid currentUserId, Guid? parentAlbumId = null)
         {
             if (string.IsNullOrWhiteSpace(albumDescription)) throw new ArgumentNullException(nameof(albumDescription));
