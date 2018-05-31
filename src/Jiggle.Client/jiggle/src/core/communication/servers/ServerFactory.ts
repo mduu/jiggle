@@ -1,12 +1,9 @@
 import { IRemote } from '..';
-import { InMemoryServerFactory } from '.';
-
-export interface IServerFactory {
-    createServer(): IRemote;
-}
+import { IServerFactory, RemoteServerFactory } from '.';
 
 export class ServerFactory implements IServerFactory {
     createServer(): IRemote {
-        return InMemoryServerFactory();
+        // return InMemoryServerFactory();
+        return RemoteServerFactory();
     }
 }
