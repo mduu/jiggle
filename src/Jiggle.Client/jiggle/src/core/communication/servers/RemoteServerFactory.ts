@@ -7,7 +7,7 @@ import { IRemoteServerConfiguration } from '../../configuration';
 export function RemoteServerFactory(): IRemote {
 
     const config = {
-        remoteUrl: 'http://localhost:8081'
+        remoteUrl: 'http://localhost:5001/api/v1'
     } as IRemoteServerConfiguration;
 
     return new RemoteServer(

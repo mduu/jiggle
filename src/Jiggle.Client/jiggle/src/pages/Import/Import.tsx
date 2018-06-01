@@ -53,7 +53,7 @@ class ImportComponent extends React.Component<TProps> {
                   <MenuItem value=""><em>New album</em>
                   </MenuItem>
                   { albums && albums.map((a, i) => (
-                    <MenuItem key={i} value={a.id}>{a.caption}</MenuItem>
+                    <MenuItem key={i} value={a.id}>{a.name}</MenuItem>
                   ))}
                 </Select>
                 <FormHelperText>If album doesn't exists create a new one.</FormHelperText>

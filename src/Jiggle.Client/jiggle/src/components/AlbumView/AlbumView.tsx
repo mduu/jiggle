@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { IAlbum } from '../../core';
 
 export interface IProps {
     album: IAlbum;
