@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Jiggle.Core.Entities;
 using Jiggle.Core.Common;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jiggle.Core.AssetManagement
 {
@@ -15,6 +17,13 @@ namespace Jiggle.Core.AssetManagement
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
+        public async Task<IEnumerable<Tag>> GetAllTagsAsync()
+        {
+            return await context.Tags.ToListAsync();
+        }
+
+        /// <inheritdoc/>
         public IEnumerable<Tag> GetTagsByName(IEnumerable<string> tagnames)
         {
             if (tagnames == null) throw new ArgumentNullException(nameof(tagnames));
