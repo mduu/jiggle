@@ -53,7 +53,7 @@ namespace Jiggle.Core.AssetManagement
         }
 
         /// <inheritdoc/>
-        public async Task<IEnumerable<Album>> GetAllAlbums()
+        public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
         {
             return await context.Albums
                                 .Include(a => a.CreatedBy)

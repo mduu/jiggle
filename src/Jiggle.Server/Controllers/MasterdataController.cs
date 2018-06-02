@@ -31,7 +31,7 @@ namespace Jiggle.Server.Controllers
         public async Task<JsonResult> Get()
         {
             var allTags = await tagManager.GetAllTagsAsync();
-            var allAlbums = await albumManager.GetAllAlbums();
+            var allAlbums = await albumManager.GetAllAlbumsAsync();
 
             return Json(new MasterdataDto {
                 AllTags = allTags.Select(t => t.Name).ToArray(),

@@ -36,7 +36,7 @@ namespace Jiggle.Core.AssetManagement
         /// Gets data for all albums.
         /// </summary>
         /// <returns>The all albums.</returns>
-        Task<IEnumerable<Album>> GetAllAlbums();
+        Task<IEnumerable<Album>> GetAllAlbumsAsync();
 
         /// <summary>
         /// Create a new <see cref="Album"/>.
