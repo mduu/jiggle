@@ -10,7 +10,7 @@ using Jiggle.Core.AssetManagement;
 
 namespace Jiggle.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     public class MasterdataController : Controller
     {
         private readonly IAlbumManager albumManager;
