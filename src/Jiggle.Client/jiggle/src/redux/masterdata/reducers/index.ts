@@ -1,15 +1,6 @@
-import { IAlbumMetadata, Tags, IError } from '../../../core';
 import { MasterdataAction } from '../actions/';
 import * as constants from '../actions/types';
-
-export type MasterdataState = {
-    isFetching: boolean;
-    isLoaded: boolean;
-    errors?: IError[];
-    tags: Tags;
-    albums: IAlbumMetadata[];
-    receivedAt?: number;
-};
+import { MasterdataState } from '..';
 
 const initalState = {
     isFetching: false,
