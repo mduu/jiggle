@@ -9,8 +9,8 @@ export class InMemoryServer implements IRemote {
 
         const responseObject: IResponseObject<IMasterdataPayload> = {
              payload: {
-                tags: this.tags,
-                albums: [ this.createMyFirstTestAlbumMetadata()]
+                allTags: this.tags,
+                allAlbums: [ this.createMyFirstTestAlbumMetadata()]
             }
         };
 

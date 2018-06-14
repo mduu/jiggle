@@ -29,8 +29,8 @@ export const masterdataFetch = (): TDispatchableReturn<MasterdataAction> =>
                 }) as IError)));
             } else {
                 dispatch(masterdataReceive(
-                    response.payload.tags, 
-                    response.payload.albums ? response.payload.albums : []));
+                    response.payload.allTags, 
+                    response.payload.allAlbums ? response.payload.allAlbums : []));
             }
         } catch (ex) {
             dispatch(masterdataError([{ message: ex.message }]));

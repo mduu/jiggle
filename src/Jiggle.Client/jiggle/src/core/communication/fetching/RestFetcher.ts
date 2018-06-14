@@ -1,7 +1,7 @@
 import { IResponseObject } from '..';
-import { Fetcher } from '.';
+import { IFetcher } from '.';
 
-export class RestFetcher implements Fetcher {
+export class RestFetcher implements IFetcher {
     getJson<TPayload>(url: string): Promise<IResponseObject<TPayload>> {
         return fetch(url)
         .then(

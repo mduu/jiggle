@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IAlbumMetadata, IAlbum } from '../../../../core';
+import { IAlbum } from '../../../../core';
 
 export type TProps = {
     album: IAlbum;
