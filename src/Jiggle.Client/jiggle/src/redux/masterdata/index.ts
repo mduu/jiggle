@@ -1,3 +1,3 @@
 export * from './actions/';
 export { masterdata } from './reducers';
-export { MasterdataState } from './state';
+export { MasterdataState, getMasterdataState } from './state';

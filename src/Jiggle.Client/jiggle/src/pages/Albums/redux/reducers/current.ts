@@ -12,6 +12,8 @@ export function currentReducer(state: AlbumsPageCurrentState = initial, action: 
                 currentAlbum: action.currentAlbum
             };
 
+        default:
+            break;
     }
 
     return state;

@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 import './Albums.css';
-import { getMasterdataState, TAppState } from '../../redux';
+import { getMasterdataState, store, TAppState } from '../../redux';
 import { Tags, IAlbumMetadata, IAlbum } from '../../core';
 import * as fromActions from './redux/actions';
+import { getVirtualRootAlbum } from './redux/logic';
+import { AlbumView } from './components';
+import { getAlbumPageCurrentState } from './redux/state';
 
 type TOwnProps = {};
 
 type TStateProps = {
     allTags: Tags;
     allAlbums: IAlbumMetadata[];
+    currentAlbum?: IAlbum;
 };
 
 type TDispatchProps = {
@@ -21,16 +25,18 @@ type TProps = TOwnProps & TStateProps & TDispatchProps;
 class AlbumsComponent extends React.Component<TProps> {
 
     componentDidMount() {
-        const virtualRootAlbum = getVirtualRootAlbum();
+        const virtualRootAlbum = getVirtualRootAlbum(store.getState());
         const {changeCurrentAlbum} = this.props;
         changeCurrentAlbum(virtualRootAlbum);
     }
 
     render() {
+        const { currentAlbum } = this.props;
+
         return (
             <section className="Albums">
                 <h1>Albums</h1>
-                <p>Under constuction...</p>
+                {currentAlbum && <AlbumView album={currentAlbum}/>}
             </section>
         );
     }
@@ -39,10 +45,11 @@ class AlbumsComponent extends React.Component<TProps> {
 
 export function mapStateToProps(state: TAppState): TStateProps {
     const masterdata = getMasterdataState(state);
-
+    const albumPageCurrentState = getAlbumPageCurrentState(state);
     return {
         allTags: masterdata.tags,
         allAlbums: masterdata.albums,
+        currentAlbum: albumPageCurrentState.currentAlbum
     };
 }
 
