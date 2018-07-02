@@ -10,11 +10,10 @@ export class RestFetcher implements IFetcher {
         }
 
         // noinspection TsLint
-        return fetch(url,
-            {
-                cache: 'no-cache',
-                headers: this.createCustomHeaders()
-            })
+        return fetch(url, {
+            cache: 'no-cache',
+            headers: this.createCustomHeaders()
+        })
             .then(
                 response => response.json(),
                 error => {
@@ -47,7 +46,7 @@ export class RestFetcher implements IFetcher {
         return await this.sendToServerAsync<TResult>('PATCH', url, data);
     }
 
-    private async sendToServerAsync<TResult>(method: string, url: string, data: any): Promise<TResult> {
+    private async sendToServerAsync<TResult>(method: string, url: string, data: object): Promise<TResult> {
 
         return await
             fetch(url, {
