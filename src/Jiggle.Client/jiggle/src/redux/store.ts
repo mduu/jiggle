@@ -1,7 +1,7 @@
 import { compose, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { createStore } from 'redux';
-import { TAppState, rootReducer } from '.';
+import { rootReducer } from '.';
 
 // Try to get the REDUX DEV TOOLS instance
 const tryGetDevTools = () => {
@@ -24,8 +24,8 @@ const enhancer = composeEnhancers(
     applyMiddleware(thunkMiddleware)
 );
 
-// Build the central redux store (global state)
-export const store = createStore<TAppState>(
+// Build the central Redux store (global state)
+export const store = createStore(
     rootReducer,
     enhancer
 );
