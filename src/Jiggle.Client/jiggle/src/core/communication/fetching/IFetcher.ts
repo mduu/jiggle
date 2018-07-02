@@ -1,8 +1,13 @@
 import { IResponseObject } from '..';
 
 export interface IFetcher {
-    getJson<TPayload>(url: string): Promise<IResponseObject<TPayload>>;
-    
-    postData<TPayloadRequest, TPayloadResponse>(url: string, payload: TPayloadRequest): 
-        Promise<IResponseObject<TPayloadResponse>>;
+    getJsonAsync<TPayload>(url: string): Promise<IResponseObject<TPayload>>;
+
+    // noinspection TypescriptExplicitMemberType
+    // noinspection TsLint
+    postAsync<TResult>(url: string, data: object): Promise<TResult>;
+
+    // noinspection TypescriptExplicitMemberType
+    // noinspection TsLint
+    patchAsync<TResult>(url: string, data: object): Promise<TResult>;
 }

@@ -18,6 +18,6 @@ export class RemoteServer implements IRemote {
     getMasterdata(): Promise<IResponseObject<IMasterdataPayload>> {
         const url = this.urlManager.getMasterdataUrl();
 
-        return this.fetcher.getJson(url);
+        return this.fetcher.getJsonAsync(url);
     }
 }
