@@ -5,63 +5,72 @@ import { Route, RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { CircularProgress } from 'material-ui';
 import { MainContent } from './MainContent';
+import { Menu } from './Menu';
+import { getMasterdataState, TAppState } from '../../redux';
+import { IError } from '../../core';
+import { ErrorMessage } from '../../elements';
 
 import './App.css';
-import { Menu } from './Menu';
-import { TAppState } from '../../redux';
 
 export type TOwnProps = {
-  selectedMainMenuItem?: string;
+    selectedMainMenuItem?: string;
 } & RouteComponentProps<{}>;
 
 type TStateProps = {
-  isFetching: boolean;
-  isLoaded: boolean;
+    isFetching: boolean;
+    isLoaded: boolean;
+    errors?: IError[];
 };
 
 type TDispatchProps = {
-  onMasterdataFetch: () => void;
+    onMasterdataFetch: () => void;
 };
 
 type TProps = TOwnProps & TStateProps & TDispatchProps;
 
 export class AppComponent extends React.Component<TProps> {
 
-  componentDidMount() {
-    const { onMasterdataFetch } = this.props;
+    componentDidMount() {
+        const {onMasterdataFetch} = this.props;
 
-    if (onMasterdataFetch) {
-      onMasterdataFetch();
+        if (onMasterdataFetch) {
+            onMasterdataFetch();
+        }
     }
-  }
 
-  render() {
-    const { isFetching, isLoaded } = this.props;
+    render() {
+        const {isFetching, isLoaded, errors} = this.props;
 
-    return (
-      <div className="App">
-        <Menu />
+        return (
+            <div className="App">
+                <Menu/>
 
-        <Route path="*" >
-          <section className="main-content">
-            {isFetching && <CircularProgress />}
-            {isLoaded && <MainContent />}
-          </section>
-        </Route>
-      </div>
-    );
-  }
+                <Route path="*">
+                    <section className="main-content">
+                        {isFetching && <CircularProgress/>}
+                        {errors && errors.length > 0 && errors.map((e, i) =>
+                            <ErrorMessage key={i} error={e} />)
+                        }
+                        {isLoaded && <MainContent/>}
+                    </section>
+                </Route>
+            </div>
+        );
+    }
 }
 
 export function mapStateToProps(state: TAppState) {
-  return {
-    isFetching: state.masterdata.isFetching,
-    isLoaded: state.masterdata.isLoaded
-  };
+    const masterdataState = getMasterdataState(state);
+
+    return {
+        isFetching: masterdataState.isFetching,
+        isLoaded: masterdataState.isLoaded,
+        errors: masterdataState.errors
+    };
 }
 
 const dispatchProps: TDispatchProps = {
-  onMasterdataFetch: masterdataActions.masterdataFetch
+    onMasterdataFetch: masterdataActions.masterdataFetch
 };
 
 // tslint:disable-next-line:max-line-length
