@@ -27,7 +27,6 @@ namespace Jiggle.Server.Controllers
         }
 
         // GET: api/masterdata
-        [HttpGet]
         public async Task<JsonResult> Get()
         {
             var allTags = await tagManager.GetAllTagsAsync();
