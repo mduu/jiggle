@@ -4,28 +4,18 @@ import { IFetcher } from '.';
 export class RestFetcher implements IFetcher {
     private logToConsole: boolean = true;
 
-    getJsonAsync<TPayload>(url: string): Promise<IResponseObject<TPayload>> {
+    public async getJsonAsync<TPayload>(url: string): Promise<IResponseObject<TPayload>> {
         if (this.logToConsole) {
             console.debug(`Fetch JSON from URL [${url}]`);
         }
 
-        // noinspection TsLint
-        return fetch(url, {
+        return await
+        fetch(url, {
             cache: 'no-cache',
             headers: this.createCustomHeaders()
         })
-            .then(
-                response => response.json(),
-                error => {
-                    console.log('An error occurred.', error);
-                    return Promise.resolve({
-                        errors: [{message: error.message}]
-                    } as IResponseObject<TPayload>);
-                }
-            )
-            .then(json =>
-                Promise.resolve(json as IResponseObject<TPayload>)
-            );
+            .then((response) => response.ok ? response.json() : Promise.reject(response))
+            .catch((reason) => Promise.reject(reason));
     }
 
     // noinspection TsLint
