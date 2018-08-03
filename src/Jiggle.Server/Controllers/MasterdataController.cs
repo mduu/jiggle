@@ -7,6 +7,7 @@ using Jiggle.Server.Core.DTO;
 using Jiggle.Core.AssetManagement;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Jiggle.Server.Communication;
 
 namespace Jiggle.Server.Controllers
 {
@@ -32,10 +33,10 @@ namespace Jiggle.Server.Controllers
             var allTags = await tagManager.GetAllTagsAsync();
             var allAlbums = await albumManager.GetAllAlbumsAsync();
 
-            return Json(new MasterdataDto {
-                AllTags = allTags.Select(t => t.Name).ToArray(),
-                AllAlbums = allAlbums.Select(a => AlbumDto.FromAlbum(a)).ToArray(),
-            });
+            return Json(new ResponseObject<MasterdataDto>(new MasterdataDto {
+                allTags = allTags.Select(t => t.Name).ToArray(),
+                allAlbums = allAlbums.Select(a => AlbumDto.FromAlbum(a)).ToArray(),
+            }));
         }
     }
 }

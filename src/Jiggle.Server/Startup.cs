@@ -26,10 +26,9 @@ namespace Jiggle.Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddMvc();
-
             services.AddDbContext<DatabaseContext>(options => options.UseSqlite("Data Source=Jiggle.db"));
-
             services.AddJiggleCore(
                 new ThumbnailSettings(200, 200), // TODO
                 new FileSystemConfiguration(
@@ -46,6 +45,12 @@ namespace Jiggle.Server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());  
 
             app.UseMvc();
         }

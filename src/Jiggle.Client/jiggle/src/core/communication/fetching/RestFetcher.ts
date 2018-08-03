@@ -9,13 +9,15 @@ export class RestFetcher implements IFetcher {
             console.debug(`Fetch JSON from URL [${url}]`);
         }
 
+        // noinspection SpellCheckingInspection
         return await
-        fetch(url, {
-            cache: 'no-cache',
-            headers: this.createCustomHeaders()
-        })
-            .then((response) => response.ok ? response.json() : Promise.reject(response))
-            .catch((reason) => Promise.reject(reason));
+            fetch(url, {
+                cache: 'no-cache',
+                mode: 'cors',
+                headers: this.createCustomHeaders()
+            })
+                .then((response) => response.ok ? response.json() : Promise.reject(response))
+                .catch((reason) => Promise.reject(reason));
     }
 
     // noinspection TsLint
