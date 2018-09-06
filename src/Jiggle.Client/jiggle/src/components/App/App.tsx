@@ -3,7 +3,7 @@ import * as masterdataActions from '../../redux/masterdata/actions';
 import { connect } from 'react-redux';
 import { Route, RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress } from '@material-ui/core';
 import { MainContent } from './MainContent';
 import { Menu } from './Menu';
 import { getMasterdataState, TAppState } from '../../redux';

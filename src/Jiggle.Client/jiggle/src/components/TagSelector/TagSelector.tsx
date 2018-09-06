@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TextField } from 'material-ui';
+import { TextField } from '@material-ui/core';
 import { Tags } from '../../core';
 
 export type TProps = {

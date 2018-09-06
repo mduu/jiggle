@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
+import { Button } from '@material-ui/core';
 import './Albums.css';
 import { getMasterdataState, store, TAppState } from '../../redux';
 import { Tags, IAlbumMetadata, IAlbum } from '../../core';
@@ -34,10 +35,10 @@ class AlbumsComponent extends React.Component<TProps> {
         const { currentAlbum } = this.props;
 
         return (
-            <section className="Albums">
-                <h1>Albums</h1>
+            <div>
+                <Button>New Album</Button>
                 {currentAlbum && <AlbumView album={currentAlbum}/>}
-            </section>
+            </div>
         );
     }
 

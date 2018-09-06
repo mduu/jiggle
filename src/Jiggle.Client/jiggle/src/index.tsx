@@ -3,10 +3,9 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux';
 import registerServiceWorker from './registerServiceWorker';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
-// import Reboot from 'material-ui/Reboot';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { App } from './components/App/App';
+import { App } from './components';
 
 import './index.css';
 

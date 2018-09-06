@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { Button, TextField, Grid, FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from 'material-ui';
+import { Button, TextField, Grid, FormControl, InputLabel, Select, Input, MenuItem, FormHelperText } from '@material-ui/core';
 import { TagSelector } from '../../components';
 import { Tags, IAlbumMetadata } from '../../core';
 

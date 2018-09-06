@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Snackbar } from 'material-ui';
+import { Snackbar } from '@material-ui/core';
 import { IError } from '../../core';
 
 type TStyles = {
