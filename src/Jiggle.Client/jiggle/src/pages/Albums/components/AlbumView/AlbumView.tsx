@@ -9,7 +9,7 @@ export const AlbumView = ({ album }: TProps) => {
 
     return (
         <div>
-            <h1>{album.name}</h1>
+            <h2>{album.name}</h2>
             
         </div>
     );

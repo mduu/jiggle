@@ -36,6 +36,7 @@ class AlbumsComponent extends React.Component<TProps> {
 
         return (
             <div>
+                <h1>Albums</h1>
                 <Button>New Album</Button>
                 {currentAlbum && <AlbumView album={currentAlbum}/>}
             </div>
