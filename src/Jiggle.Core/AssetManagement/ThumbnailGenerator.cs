@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace Jiggle.Core.AssetManagement
 {
@@ -13,7 +14,7 @@ namespace Jiggle.Core.AssetManagement
         {
             if (originalContent == null) throw new ArgumentNullException(nameof(originalContent));
 
-            using (Image<Rgba32> image = Image.Load(originalContent))
+            using (var image = Image.Load(originalContent))
             {
                 image.Mutate(x => x
                      .Resize(width, height));

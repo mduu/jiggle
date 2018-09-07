@@ -105,7 +105,7 @@ namespace Jiggle.Core.Tests.AssetManagement.FileStore
             Assert.Equal(locationInfo, filepathThatMustExists);
             Assert.True(File.Exists(filepathThatMustExists));
             Assert.False(File.Exists(filepathThatMustNotExists));
-            Assert.Equal(new FileInfo(locationInfo).Length, 2);
+            Assert.Equal(2, new FileInfo(locationInfo).Length);
         }
     }
 }

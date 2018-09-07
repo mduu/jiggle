@@ -13,12 +13,12 @@
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
-    <PackageReference Include="SixLabors.Core" Version="1.0.0-beta0004" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0002" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.2" />
+    <PackageReference Include="SixLabors.Core" Version="1.0.0-beta0006" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0005" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="2.0.0-preview1-final" />
     <PackageReference Include="MimeTypes" Version="1.0.6" />
   </ItemGroup>
