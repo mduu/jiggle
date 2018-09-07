@@ -9,6 +9,7 @@ import { getVirtualRootAlbum } from './redux/logic';
 import { AlbumView } from './components';
 import { getAlbumPageCurrentState } from './redux/state';
 import NewAlbum from '@material-ui/icons/LibraryAdd';
+import AlbumCreateDialog from '../../components/AlbumCreateDialog/AlbumCreateDialog';
 
 type TOwnProps = {};
 
@@ -24,33 +25,59 @@ type TDispatchProps = {
 
 type TProps = TOwnProps & TStateProps & TDispatchProps;
 
-class AlbumsComponent extends React.Component<TProps> {
+type TState = {
+    showCreateAlbumDialog: boolean;
+};
+
+class AlbumsComponent extends React.Component<TProps, TState> {
+
+    constructor(props: TProps) {
+        super(props);
+        this.state = {
+            showCreateAlbumDialog: false
+        };
+    }
 
     componentDidMount() {
         const virtualRootAlbum = getVirtualRootAlbum(store.getState());
-        const { changeCurrentAlbum } = this.props;
+        const {changeCurrentAlbum} = this.props;
         changeCurrentAlbum(virtualRootAlbum);
     }
 
-    handleNewAlbum = () => {
+    handleDoCreateNewAlbum = (albumTitle: string, albumDescription: string) => {
+        this.setState({showCreateAlbumDialog: false});
+
         // TODO
+        console.log(`create new album: ${albumTitle} / ${albumDescription}`);
     }
 
     render() {
-        const { currentAlbum } = this.props;
+        const {currentAlbum} = this.props;
+        const {showCreateAlbumDialog} = this.state;
 
         return (
             <div>
                 <h1>Albums</h1>
-                <Button onClick={this.handleNewAlbum} color="primary" variant="raised" aria-label="Create new album">
-                    <NewAlbum/>
+
+                {showCreateAlbumDialog &&
+                <AlbumCreateDialog
+                    onConfirm={this.handleDoCreateNewAlbum}
+                    onCancel={() => this.setState({showCreateAlbumDialog: false})}
+                />}
+
+                <Button
+                    onClick={() => this.setState({showCreateAlbumDialog: true})}
+                    color="primary"
+                    variant="raised"
+                    aria-label="Create new album"
+                >
+                    <NewAlbum />
                     New album
                 </Button>
                 {currentAlbum && <AlbumView album={currentAlbum}/>}
             </div>
         );
     }
-
 }
 
 export function mapStateToProps(state: TAppState): TStateProps {
