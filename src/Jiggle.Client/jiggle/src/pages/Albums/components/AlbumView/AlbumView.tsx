@@ -9,8 +9,7 @@ export const AlbumView = ({ album }: TProps) => {
 
     return (
         <div>
-            <h2>{album.name}</h2>
-            
+            {album.name !== '' && <h2>{album.name}</h2>}
         </div>
     );
 };

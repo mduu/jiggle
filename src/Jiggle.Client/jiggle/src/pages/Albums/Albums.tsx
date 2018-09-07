@@ -8,6 +8,7 @@ import * as fromActions from './redux/actions';
 import { getVirtualRootAlbum } from './redux/logic';
 import { AlbumView } from './components';
 import { getAlbumPageCurrentState } from './redux/state';
+import NewAlbum from '@material-ui/icons/LibraryAdd';
 
 type TOwnProps = {};
 
@@ -27,8 +28,12 @@ class AlbumsComponent extends React.Component<TProps> {
 
     componentDidMount() {
         const virtualRootAlbum = getVirtualRootAlbum(store.getState());
-        const {changeCurrentAlbum} = this.props;
+        const { changeCurrentAlbum } = this.props;
         changeCurrentAlbum(virtualRootAlbum);
+    }
+
+    handleNewAlbum = () => {
+        // TODO
     }
 
     render() {
@@ -37,7 +42,10 @@ class AlbumsComponent extends React.Component<TProps> {
         return (
             <div>
                 <h1>Albums</h1>
-                <Button>New Album</Button>
+                <Button onClick={this.handleNewAlbum} color="primary" variant="raised" aria-label="Create new album">
+                    <NewAlbum/>
+                    New album
+                </Button>
                 {currentAlbum && <AlbumView album={currentAlbum}/>}
             </div>
         );

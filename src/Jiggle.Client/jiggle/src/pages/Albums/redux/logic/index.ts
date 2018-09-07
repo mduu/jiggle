@@ -5,7 +5,7 @@ import { getMasterdataState } from '../../../../redux';
 export function getVirtualRootAlbum(state: TAppState): IAlbum {
     return {
         id: 'root',
-        name: 'Albums',
+        name: '',
         createdBy: '',
         childAlbums: getRootChildAlbums(state),
     } as IAlbum;
