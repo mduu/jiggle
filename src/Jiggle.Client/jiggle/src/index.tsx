@@ -7,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { App } from './components';
 
-import './index.css';
+import './index.less';
 
 const theme = createMuiTheme({
   palette: {

@@ -18,12 +18,13 @@
     "noUnusedLocals": true
   },
   "exclude": [
+    "tests",
+    "dist/**",
+    "config/**",
+    "./*.js",
     "node_modules",
+    "coverage",
     "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
+    "scripts"
   ]
 }

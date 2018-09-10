@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { connect, Dispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { Dispatch } from 'redux';
 import { Button } from '@material-ui/core';
-import './Albums.css';
+import './Albums.less';
 import { getMasterdataState, store, TAppState } from '../../redux';
 import { Tags, IAlbumMetadata, IAlbum } from '../../core';
 import * as fromActions from './redux/actions';
@@ -90,7 +92,7 @@ export function mapStateToProps(state: TAppState): TStateProps {
     };
 }
 
-function mapDispatchToProps(dispatch: Dispatch<fromActions.AlbumPageAction>): TDispatchProps {
+function mapDispatchToProps(dispatch: ThunkDispatch<TAppState, Dispatch, fromActions.AlbumPageAction>): TDispatchProps {
     return {
         changeCurrentAlbum: (currentAlbum: IAlbum) => dispatch(fromActions.changeCurrentAlbum(currentAlbum)),
     } as TDispatchProps;
