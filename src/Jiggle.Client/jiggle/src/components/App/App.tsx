@@ -3,14 +3,22 @@ import * as masterdataActions from '../../redux/masterdata/actions';
 import { connect } from 'react-redux';
 import { Route, RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
+import { AppBar, CircularProgress, Toolbar, Typography } from '@material-ui/core';
 import { MainContent } from './MainContent';
 import { Menu } from './Menu';
 import { getMasterdataState, TAppState } from '../../redux';
 import { IError } from '../../core';
 import { ErrorMessage } from '../../elements';
 
-import './App.css';
+type TStyles = {
+    appRoot: string;
+    appAppBar: string;
+    appContent: string;
+    appMenu: string;
+    appMainContent: string;
+};
+
+const styles: TStyles = require('./App.less');
 
 export type TOwnProps = {
     selectedMainMenuItem?: string;
@@ -42,18 +50,32 @@ export class AppComponent extends React.Component<TProps> {
         const {isFetching, isLoaded, errors} = this.props;
 
         return (
-            <div className="App">
-                <Menu/>
+            <div className={styles.appRoot}>
+                <AppBar position="absolute" className={styles.appAppBar}>
+                    <Toolbar>
+                        <Typography variant="title" color="inherit" noWrap={true}>
+                            Jiggle
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
 
-                <Route path="*">
-                    <section className="main-content">
-                        {isFetching && <CircularProgress/>}
-                        {errors && errors.length > 0 && errors.map((e, i) =>
-                            <ErrorMessage key={i} error={e} />)
-                        }
-                        {isLoaded && <MainContent/>}
-                    </section>
-                </Route>
+                <div className={styles.appContent}>
+                    <div className={styles.appMenu}>
+                        <Menu/>
+                    </div>
+
+                    <div className={styles.appMainContent}>
+                        <Route path="*">
+                            <section className="main-content">
+                                {isFetching && <CircularProgress/>}
+                                {errors && errors.length > 0 && errors.map((e, i) =>
+                                    <ErrorMessage key={i} error={e} />)
+                                }
+                                {isLoaded && <MainContent/>}
+                            </section>
+                        </Route>
+                    </div>
+                </div>
             </div>
         );
     }

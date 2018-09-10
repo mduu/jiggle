@@ -1,0 +1,31 @@
+@APP_ROOT: ~':local(.appRoot)';
+@APP_APP_BAR: ~':local(.appAppBar)';
+@APP_CONTENT: ~':local(.appContent)';
+@APP_MENU: ~':local(.appMenu)';
+@APP_MAIN_CONTENT: ~':local(.appMainContent)';
+
+@{APP_ROOT}{
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%
+}
+
+@{APP_APP_BAR}{
+  z-index: 9999 !important;
+}
+
+@{APP_CONTENT}{
+  flex: 1;
+  display: flex;
+}
+
+@{APP_MENU}{
+}
+
+@{APP_MAIN_CONTENT}{
+  flex: 1;
+  height: 100%
+}

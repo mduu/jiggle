@@ -11,7 +11,7 @@ import './index.css';
 
 const theme = createMuiTheme({
   palette: {
-    type: 'light',
+    type: 'dark',
   },
 });
 

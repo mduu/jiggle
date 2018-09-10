@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 
 export type TMenuItemProps = {
     text: string;
@@ -12,9 +13,12 @@ export const MenuItem = (props: TMenuItemProps) => {
 
     return (
         <NavLink exact={true} to={props.routeTo} activeClassName="selected">
-            <div className="main-menu-item">
-                <i className={cssClassIcon} />&nbsp;{props.text}
-            </div>
+            <ListItem button={true}>
+                <ListItemIcon>
+                    <i className={cssClassIcon} />
+                </ListItemIcon>
+                <ListItemText primary={props.text} />
+            </ListItem>
         </NavLink>
     );
 };
