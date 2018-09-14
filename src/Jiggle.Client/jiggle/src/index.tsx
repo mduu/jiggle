@@ -10,20 +10,26 @@ import { App } from './components';
 import './index.less';
 
 const theme = createMuiTheme({
-  palette: {
-    type: 'dark',
-  },
+    palette: {
+        type: 'dark',
+        primary: {
+            main: '#ff9100',
+        },
+        secondary: {
+            main: '#ffd600',
+        },
+    },
 });
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}>
-    {/* <Reboot /> */}
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
-  </MuiThemeProvider>, 
-  document.getElementById('root') as HTMLElement
+    <MuiThemeProvider theme={theme}>
+        {/* <Reboot /> */}
+        <Provider store={store}>
+            <Router>
+                <App/>
+            </Router>
+        </Provider>
+    </MuiThemeProvider>,
+    document.getElementById('root') as HTMLElement
 );
 registerServiceWorker();
