@@ -1,6 +1,8 @@
 import { IResponseObject } from '..';
 import { IFetcher } from '.';
+import { injectable } from 'inversify';
 
+@injectable()
 export class RestFetcher implements IFetcher {
     private logToConsole: boolean = true;
 

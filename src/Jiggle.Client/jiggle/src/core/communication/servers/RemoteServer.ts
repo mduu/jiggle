@@ -1,23 +1,19 @@
-import { IRemote, IResponseObject, IMasterdataPayload } from '..';
+import { inject, injectable } from 'inversify';
+import { SERVICE_IDENTIFIERS } from '../../ioc';import { IRemote, IResponseObject, IMasterdataPayload } from '..';
 import { IFetcher } from '../fetching';
 import { IUrlManager } from './IUrlManager';
 
+
+@injectable()
 export class RemoteServer implements IRemote {
 
-    private urlManager: IUrlManager; 
-    private fetcher: IFetcher;
-
-    constructor(fetcher: IFetcher, urlManager: IUrlManager) {
-        if (!fetcher) { throw new Error('Argument "fetcher" is required!');  }
-        if (!urlManager) { throw new Error('Argument "urlManager" is required!'); }
-
-        this.fetcher = fetcher;
-        this.urlManager = urlManager;
+    constructor(
+        @inject(SERVICE_IDENTIFIERS.IFETCHER) private fetcher: IFetcher,
+        @inject(SERVICE_IDENTIFIERS.IURLMANAGER) private urlManager: IUrlManager) {
     }
 
     getMasterdata(): Promise<IResponseObject<IMasterdataPayload>> {
         const url = this.urlManager.getMasterdataUrl();
-
         return this.fetcher.getJsonAsync(url);
     }
 }

@@ -1,20 +1,17 @@
 import { IUrlManager } from './IUrlManager';
-import { IRemoteServerConfiguration } from '../../configuration';
+import { inject, injectable } from 'inversify';
+import { ISettings } from '../../settings';
+import { SERVICE_IDENTIFIERS } from '../../ioc';
 
+@injectable()
 export class UrlManager implements IUrlManager {
-
-    remoteServerConfiguration: IRemoteServerConfiguration;
-
-    constructor(remoteServerConfiguration: IRemoteServerConfiguration) {
-        if (!remoteServerConfiguration) { throw new Error('Parameter "remoteServerConfiguration" is required!'); }
-
-        this.remoteServerConfiguration = remoteServerConfiguration;
+    constructor(@inject(SERVICE_IDENTIFIERS.ISETTINGS) private settings: ISettings) {
     }
 
     getMasterdataUrl = (): string => (this.combineUrl('masterdata'));
 
     private combineUrl(...urlSegments: string[]): string {
-        return [ this.remoteServerConfiguration.remoteUrl, ...urlSegments].join('/');
+        return [ this.settings.backendServerUrl, ...urlSegments].join('/');
     }
 
 }

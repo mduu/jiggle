@@ -1,4 +1,3 @@
-export { InMemoryServerFactory } from './InMemoryServerFactory';
-export { RemoteServerFactory } from './RemoteServerFactory';
-export { IServerFactory } from './IServerFactory';
-export { ServerFactory } from './ServerFactory';
+export { IUrlManager } from './IUrlManager';
+export { RemoteServer } from './RemoteServer';
+export { UrlManager } from './UrlManager';

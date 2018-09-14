@@ -1,8 +1,7 @@
 import { TDispatchableReturn } from '../../types';
-import { ServerFactory } from '../../../core/communication/servers';
 import { MasterdataAction } from '..';
-import { masterdataRequest, masterdataError, masterdataReceive } from './factories';
-import { IError } from '../../../core';
+import { masterdataError, masterdataReceive, masterdataRequest } from './factories';
+import { IError, remote } from '../../../core';
 
 export * from './types';
 
@@ -17,10 +16,8 @@ export const masterdataFetch = (): TDispatchableReturn<MasterdataAction> =>
 
         dispatch(masterdataRequest());
 
-        const server = new ServerFactory().createServer();
-
         try {
-            const response = await server.getMasterdata();
+            const response = await remote().getMasterdata();
             if (response.errors) {
                 dispatch(masterdataError(response.errors.map((e) => ({
                     code: e.errorCode,
