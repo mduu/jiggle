@@ -11,9 +11,9 @@ import './index.less';
 
 const theme = createMuiTheme({
     palette: {
-        type: 'dark',
+        type: 'light',
         primary: {
-            main: '#ff9100',
+            main: '#d50000',
         },
         secondary: {
             main: '#ffd600',
