@@ -70,7 +70,7 @@ export default class AlbumCreateDialog extends React.Component<IProps, TState> {
                         <Button onClick={onCancel} color="primary">
                             Cancel
                         </Button>
-                        <Button onClick={() => onConfirm(albumTitle, albumDescription)} color="primary">
+                        <Button onClick={() => onConfirm(albumTitle, albumDescription)} color="primary" variant={'raised'}>
                             Create
                         </Button>
                     </DialogActions>
