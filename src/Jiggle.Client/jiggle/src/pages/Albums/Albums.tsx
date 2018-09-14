@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { Dispatch } from 'redux';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import './Albums.less';
 import { getMasterdataState, store, TAppState } from '../../redux';
 import { Tags, IAlbumMetadata, IAlbum } from '../../core';
@@ -59,7 +59,7 @@ class AlbumsComponent extends React.Component<TProps, TState> {
 
         return (
             <div>
-                <h1>Albums</h1>
+                <Typography variant="headline">Albums</Typography>
 
                 {showCreateAlbumDialog &&
                 <AlbumCreateDialog
