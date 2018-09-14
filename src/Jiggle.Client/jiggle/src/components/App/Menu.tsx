@@ -1,49 +1,46 @@
 import * as React from 'react';
 import { MenuItem } from './MenuItem';
-import { Drawer, List } from '@material-ui/core';
+import { List } from '@material-ui/core';
 
 export const Menu = () => (
+    <List>
+        <div>
 
-    <Drawer variant="permanent">
-        <List>
-            <div>
+            <MenuItem
+                text="Home"
+                faIconName="fa-home"
+                routeTo="/"
+            />
 
-                <MenuItem
-                    text="Home"
-                    faIconName="fa-home"
-                    routeTo="/"
-                />
+            <MenuItem
+                text="Import"
+                faIconName="fa-upload"
+                routeTo="/import"
+            />
 
-                <MenuItem
-                    text="Import"
-                    faIconName="fa-upload"
-                    routeTo="/import"
-                />
+            <MenuItem
+                text="Albums"
+                faIconName="fa-images"
+                routeTo="/albums"
+            />
 
-                <MenuItem
-                    text="Albums"
-                    faIconName="fa-images"
-                    routeTo="/albums"
-                />
+            <MenuItem
+                text="Faces"
+                faIconName="fa-user"
+                routeTo="/faces"
+            />
 
-                <MenuItem
-                    text="Faces"
-                    faIconName="fa-user"
-                    routeTo="/faces"
-                />
+            <MenuItem
+                text="Locations"
+                faIconName="fa-map-marker"
+                routeTo="/locations"
+            />
 
-                <MenuItem
-                    text="Locations"
-                    faIconName="fa-map-marker"
-                    routeTo="/locations"
-                />
-
-                <MenuItem
-                    text="Tags"
-                    faIconName="fa-tags"
-                    routeTo="/tags"
-                />
-           </div>
-        </List>
-    </Drawer>
+            <MenuItem
+                text="Tags"
+                faIconName="fa-tags"
+                routeTo="/tags"
+            />
+       </div>
+    </List>
 );

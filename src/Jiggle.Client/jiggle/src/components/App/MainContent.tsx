@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Import } from '../../pages/Import/Import';
+import { Import } from '../../pages/Import';
 import { Albums } from '../../pages/Albums/Albums';
 import Faces from '../../pages/Faces/Faces';
 import Locations from '../../pages/Locations/Locations';

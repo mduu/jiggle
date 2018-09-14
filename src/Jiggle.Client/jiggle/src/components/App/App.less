@@ -5,27 +5,20 @@
 @APP_MAIN_CONTENT: ~':local(.appMainContent)';
 
 @{APP_ROOT}{
-  flex-grow: 1;
+  flex-Grow: 1;
+  z-Index: 1;
   overflow: hidden;
   position: relative;
   display: flex;
-  flex-direction: column;
-  height: 100%
 }
 
 @{APP_APP_BAR}{
-  z-index: 9999 !important;
-}
-
-@{APP_CONTENT}{
-  flex: 1;
-  display: flex;
-}
-
-@{APP_MENU}{
+  z-Index: 2000,
 }
 
 @{APP_MAIN_CONTENT}{
-  flex: 1;
-  height: 100%
+  flex-Grow: 1;
+  background-Color: #555555;
+  padding: 20;
+  minWidth: 0, // So the Typography noWrap works
 }
