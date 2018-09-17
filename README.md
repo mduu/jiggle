@@ -1,3 +1,5 @@
+**IMPORTANT NOTICE: This project it not activelly developed anymore. I re-evaluated the "Photos" module of the Plex Media Server and as it seems have most of my requirements covered I'll give it a go. So, currently I have no need for Jiggle anymore.**
+
 # jiggle
 Easy to use and lightweight photo asset management software.
 
